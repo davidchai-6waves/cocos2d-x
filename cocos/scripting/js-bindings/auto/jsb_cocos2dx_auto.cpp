@@ -7109,6 +7109,24 @@ bool js_cocos2dx_Director_getMatrix(JSContext *cx, uint32_t argc, jsval *vp)
     JS_ReportError(cx, "js_cocos2dx_Director_getMatrix : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
+bool js_cocos2dx_Director_isValid(JSContext *cx, uint32_t argc, jsval *vp)
+{
+    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
+    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
+    js_proxy_t *proxy = jsb_get_js_proxy(obj);
+    cocos2d::Director* cobj = (cocos2d::Director *)(proxy ? proxy->ptr : NULL);
+    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_Director_isValid : Invalid Native Object");
+    if (argc == 0) {
+        bool ret = cobj->isValid();
+        jsval jsret = JSVAL_NULL;
+        jsret = BOOLEAN_TO_JSVAL(ret);
+        args.rval().set(jsret);
+        return true;
+    }
+
+    JS_ReportError(cx, "js_cocos2dx_Director_isValid : wrong number of arguments: %d, was expecting %d", argc, 0);
+    return false;
+}
 bool js_cocos2dx_Director_startAnimation(JSContext *cx, uint32_t argc, jsval *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
@@ -7878,6 +7896,7 @@ void js_register_cocos2dx_Director(JSContext *cx, JS::HandleObject global) {
         JS_FN("init", js_cocos2dx_Director_init, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("setScheduler", js_cocos2dx_Director_setScheduler, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("getMatrix", js_cocos2dx_Director_getMatrix, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
+        JS_FN("isValid", js_cocos2dx_Director_isValid, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("startAnimation", js_cocos2dx_Director_startAnimation, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("getOpenGLView", js_cocos2dx_Director_getOpenGLView, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("getRunningScene", js_cocos2dx_Director_getRunningScene, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
@@ -45761,36 +45780,22 @@ bool js_cocos2dx_ProgressTimer_getBarChangeRate(JSContext *cx, uint32_t argc, js
 }
 bool js_cocos2dx_ProgressTimer_setReverseDirection(JSContext *cx, uint32_t argc, jsval *vp)
 {
-    bool ok = true;
-    cocos2d::ProgressTimer* cobj = nullptr;
-
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    JS::RootedObject obj(cx);
-    obj.set(args.thisv().toObjectOrNull());
+    bool ok = true;
+    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
     js_proxy_t *proxy = jsb_get_js_proxy(obj);
-    cobj = (cocos2d::ProgressTimer *)(proxy ? proxy->ptr : nullptr);
+    cocos2d::ProgressTimer* cobj = (cocos2d::ProgressTimer *)(proxy ? proxy->ptr : NULL);
     JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_ProgressTimer_setReverseDirection : Invalid Native Object");
-    do {
-        if (argc == 1) {
-            bool arg0;
-            arg0 = JS::ToBoolean(args.get(0));
-            cobj->setReverseDirection(arg0);
-            args.rval().setUndefined();
-            return true;
-        }
-    } while(0);
+    if (argc == 1) {
+        bool arg0;
+        arg0 = JS::ToBoolean(args.get(0));
+        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_ProgressTimer_setReverseDirection : Error processing arguments");
+        cobj->setReverseDirection(arg0);
+        args.rval().setUndefined();
+        return true;
+    }
 
-    do {
-        if (argc == 1) {
-            bool arg0;
-            arg0 = JS::ToBoolean(args.get(0));
-            cobj->setReverseProgress(arg0);
-            args.rval().setUndefined();
-            return true;
-        }
-    } while(0);
-
-    JS_ReportError(cx, "js_cocos2dx_ProgressTimer_setReverseDirection : wrong number of arguments");
+    JS_ReportError(cx, "js_cocos2dx_ProgressTimer_setReverseDirection : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
 bool js_cocos2dx_ProgressTimer_getMidpoint(JSContext *cx, uint32_t argc, jsval *vp)
@@ -61031,7 +61036,7 @@ bool js_cocos2dx_TextFieldTTF_getPasswordTextStyle(JSContext *cx, uint32_t argc,
     cocos2d::TextFieldTTF* cobj = (cocos2d::TextFieldTTF *)(proxy ? proxy->ptr : NULL);
     JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_TextFieldTTF_getPasswordTextStyle : Invalid Native Object");
     if (argc == 0) {
-        std::string ret = cobj->getPasswordTextStyle();
+        const std::string& ret = cobj->getPasswordTextStyle();
         jsval jsret = JSVAL_NULL;
         jsret = std_string_to_jsval(cx, ret);
         args.rval().set(jsret);

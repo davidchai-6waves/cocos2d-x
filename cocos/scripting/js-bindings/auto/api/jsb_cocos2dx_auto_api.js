@@ -2922,6 +2922,16 @@ matrix_stack_type
 },
 
 /**
+ * @method isValid
+ * @return {bool}
+ */
+isValid : function (
+)
+{
+    return false;
+},
+
+/**
  * @method startAnimation
  */
 startAnimation : function (
@@ -16858,9 +16868,9 @@ getBarChangeRate : function (
 
 /**
  * @method setReverseDirection
-* @param {bool|bool} bool
-*/
-setReverseDirection : function(
+ * @param {bool} arg0
+ */
+setReverseDirection : function (
 bool 
 )
 {
