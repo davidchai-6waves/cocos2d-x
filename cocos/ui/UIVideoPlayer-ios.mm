@@ -48,8 +48,12 @@ using namespace cocos2d::experimental::ui;
 - (void) seekTo:(float) sec;
 - (void) setVisible:(BOOL) visible;
 - (void) setKeepRatioEnabled:(BOOL) enabled;
-- (void) setFullScreenEnabled:(BOOL) enabled;
+- (void) setFullScreenEnabled:(BOOL) enabled : (BOOL) animated;
+- (void) setPlaybackControllerVisible:(BOOL) visible;
 - (BOOL) isFullScreenEnabled;
+- (BOOL) isFullScreenAnimated;
+- (BOOL) isPlaybackControlEnabled;
+
 
 -(id) init:(void*) videoPlayer;
 
@@ -66,7 +70,9 @@ using namespace cocos2d::experimental::ui;
     int _width;
     int _height;
     bool _keepRatioEnabled;
-
+    bool _isFullScreenAnimated;
+    bool _isPlaybackControlEnabled;
+    
     VideoPlayer* _videoPlayer;
 }
 
@@ -76,6 +82,9 @@ using namespace cocos2d::experimental::ui;
         self.moviePlayer = nullptr;
         _videoPlayer = (VideoPlayer*)videoPlayer;
         _keepRatioEnabled = false;
+        _isFullScreenAnimated = false;
+        _isPlaybackControlEnabled = true;
+        
     }
 
     return self;
@@ -106,11 +115,22 @@ using namespace cocos2d::experimental::ui;
     }
 }
 
--(void) setFullScreenEnabled:(BOOL) enabled
+-(void) setFullScreenEnabled:(BOOL)enabled :(BOOL) animated
 {
+    _isFullScreenAnimated = animated;
     if (self.moviePlayer != nullptr) {
-        [self.moviePlayer setFullscreen:enabled animated:(true)];
+        [self.moviePlayer setFullscreen:enabled animated:_isFullScreenAnimated];
     }
+}
+
+-(BOOL) isFullScreenAnimated
+{
+    return _isFullScreenAnimated;
+}
+
+-(BOOL) isPlaybackControlEnabled
+{
+    return _isPlaybackControlEnabled;
 }
 
 -(BOOL) isFullScreenEnabled
@@ -143,6 +163,11 @@ using namespace cocos2d::experimental::ui;
     }
     self.moviePlayer.allowsAirPlay = false;
     self.moviePlayer.controlStyle = MPMovieControlStyleEmbedded;
+    if (_isPlaybackControlEnabled) {
+        self.moviePlayer.controlStyle = MPMovieControlStyleEmbedded;
+    } else {
+        self.moviePlayer.controlStyle = MPMovieControlStyleNone;
+    }
     self.moviePlayer.view.userInteractionEnabled = true;
 
     auto clearColor = [UIColor clearColor];
@@ -227,6 +252,19 @@ using namespace cocos2d::experimental::ui;
     }
 }
 
+-(void) setPlaybackControllerVisible:(BOOL)visible
+{
+    _isPlaybackControlEnabled = visible;
+    if (self.moviePlayer != NULL) {
+        if (visible) {
+            [self.moviePlayer setControlStyle:MPMovieControlStyleEmbedded];
+        } else {
+            [self.moviePlayer setControlStyle:MPMovieControlStyleNone];
+        }
+        
+    }
+}
+
 -(void) play
 {
     if (self.moviePlayer != NULL) {
@@ -269,6 +307,8 @@ VideoPlayer::VideoPlayer()
 , _fullScreenDirty(false)
 , _keepAspectRatioEnabled(false)
 , _isPlaying(false)
+, _isFullScreenAnimationEnabled(true)
+, _isPlaybackControlEnabled(true)
 {
     _videoView = [[UIVideoViewWrapperIos alloc] init:this];
 
@@ -343,9 +383,9 @@ bool VideoPlayer::isFullScreenEnabled()const
     return [((UIVideoViewWrapperIos*)_videoView) isFullScreenEnabled];
 }
 
-void VideoPlayer::setFullScreenEnabled(bool enabled)
+void VideoPlayer::setFullScreenEnabled(bool enabled, bool animated)
 {
-    [((UIVideoViewWrapperIos*)_videoView) setFullScreenEnabled:enabled];
+    [((UIVideoViewWrapperIos*)_videoView) setFullScreenEnabled:enabled :animated];
 }
 
 void VideoPlayer::setKeepAspectRatioEnabled(bool enable)
@@ -354,6 +394,15 @@ void VideoPlayer::setKeepAspectRatioEnabled(bool enable)
     {
         _keepAspectRatioEnabled = enable;
         [((UIVideoViewWrapperIos*)_videoView) setKeepRatioEnabled:enable];
+    }
+}
+
+void VideoPlayer::setPlaybackControlEnabled(bool enable)
+{
+    if (_isPlaybackControlEnabled != enable)
+    {
+        _isPlaybackControlEnabled = enable;
+        [((UIVideoViewWrapperIos*)_videoView) setPlaybackControllerVisible:enable];
     }
 }
 
@@ -469,6 +518,8 @@ void VideoPlayer::copySpecialProperties(Widget *widget)
         _videoPlayerIndex = videoPlayer->_videoPlayerIndex;
         _eventCallback = videoPlayer->_eventCallback;
         _videoView = videoPlayer->_videoView;
+        _isFullScreenAnimationEnabled = videoPlayer->_isFullScreenAnimationEnabled;
+        _isPlaybackControlEnabled = videoPlayer->_isPlaybackControlEnabled;
     }
 }
 

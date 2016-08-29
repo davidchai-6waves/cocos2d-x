@@ -25,6 +25,14 @@
 -- @return experimental::ui::VideoPlayer#experimental::ui::VideoPlayer self (return value: cc.experimental::ui::VideoPlayer)
         
 --------------------------------
+-- Indicates whether the video player's playback control is enable.<br>
+-- param Set true to show the playback control
+-- @function [parent=#VideoPlayer] setPlaybackControlEnabled 
+-- @param self
+-- @param #bool enable
+-- @return experimental::ui::VideoPlayer#experimental::ui::VideoPlayer self (return value: cc.experimental::ui::VideoPlayer)
+        
+--------------------------------
 -- Causes the video player to keep aspect ratio or no when displaying the video.<br>
 -- param enable    Specify true to keep aspect ratio or false to scale the video until <br>
 -- both dimensions fit the visible bounds of the view exactly.
@@ -41,10 +49,12 @@
         
 --------------------------------
 -- Causes the video player to enter or exit full-screen mode.<br>
--- param fullscreen    Specify true to enter full-screen mode or false to exit full-screen mode.
+-- param fullscreen    Specify true to enter full-screen mode or false to exit full-screen mode.<br>
+-- param animated      Specify true to enable animation when showing the video player
 -- @function [parent=#VideoPlayer] setFullScreenEnabled 
 -- @param self
 -- @param #bool fullscreen
+-- @param #bool animated
 -- @return experimental::ui::VideoPlayer#experimental::ui::VideoPlayer self (return value: cc.experimental::ui::VideoPlayer)
         
 --------------------------------
@@ -64,6 +74,18 @@
 --------------------------------
 -- Indicates whether the video player keep aspect ratio when displaying the video.
 -- @function [parent=#VideoPlayer] isKeepAspectRatioEnabled 
+-- @param self
+-- @return bool#bool ret (return value: bool)
+        
+--------------------------------
+-- 
+-- @function [parent=#VideoPlayer] isPlaybackControlEnabled 
+-- @param self
+-- @return bool#bool ret (return value: bool)
+        
+--------------------------------
+-- 
+-- @function [parent=#VideoPlayer] isFullScreenAnimationEnabled 
 -- @param self
 -- @return bool#bool ret (return value: bool)
         
