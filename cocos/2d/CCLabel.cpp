@@ -1165,6 +1165,7 @@ void Label::enableUnderline()
     {
         _underlineNode = DrawNode::create();
         addChild(_underlineNode, 100000);
+//        setCascadeColorEnabled(true);
         _contentDirty = true;
     }
 }
@@ -1896,8 +1897,8 @@ void Label::updateDisplayedColor(const Color3B& parentColor)
 {
     Node::updateDisplayedColor(parentColor);
 
-    if (_currentLabelType == LabelType::TTF || _currentLabelType == LabelType::STRING_TEXTURE)
-        setTextColor(Color4B(_displayedColor));
+//    if (_currentLabelType == LabelType::TTF || _currentLabelType == LabelType::STRING_TEXTURE)
+//        setTextColor(Color4B(_displayedColor));
 
     if (_textSprite)
     {

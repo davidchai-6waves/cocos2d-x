@@ -3159,7 +3159,7 @@ LabelIssue15214::LabelIssue15214()
     auto size = Director::getInstance()->getVisibleSize();
     Label* label = Label::createWithTTF("CHECK!", "fonts/arial.ttf", 48.0f);
     label->enableUnderline();
-    label->setColor(cocos2d::Color3B::BLUE);
+    label->setTextColor(cocos2d::Color4B::BLUE);
     label->setPosition(size.width/2, size.height/3*2);
     this->addChild(label);
     label = Label::createWithSystemFont("CHECK!", "Verdana", 48.0f);
