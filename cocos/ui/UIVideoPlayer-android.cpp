@@ -76,6 +76,8 @@ VideoPlayer::VideoPlayer()
 , _fullScreenEnabled(false)
 , _fullScreenDirty(false)
 , _keepAspectRatioEnabled(false)
+, _isPlaybackControlEnabled(true)
+, _isFullScreenAnimationEnabled(true)
 {
     _videoPlayerIndex = createVideoWidgetJNI();
     s_allVideoPlayers[_videoPlayerIndex] = this;
@@ -134,12 +136,12 @@ void VideoPlayer::draw(Renderer* renderer, const Mat4 &transform, uint32_t flags
 #endif
 }
 
-void VideoPlayer::setFullScreenEnabled(bool enabled)
+void VideoPlayer::setFullScreenEnabled(bool enabled, bool animated)
 {
     if (_fullScreenEnabled != enabled)
     {
         _fullScreenEnabled = enabled;
-
+        _isFullScreenAnimationEnabled = animated;
         auto frameSize = Director::getInstance()->getOpenGLView()->getFrameSize();
         JniHelper::callStaticVoidMethod(videoHelperClassName, "setFullScreenEnabled", _videoPlayerIndex, 
                                         enabled, (int)frameSize.width, (int)frameSize.height);
