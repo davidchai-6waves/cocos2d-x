@@ -586,7 +586,6 @@ void Label::setFontAtlas(FontAtlas* atlas,bool distanceFieldEnabled /* = false *
 
     if (atlas == _fontAtlas)
     {
-        FontAtlasCache::releaseFontAtlas(atlas);
         return;
     }
 
@@ -1923,7 +1922,7 @@ void Label::updateDisplayedColor(const Color3B& parentColor)
 
     for (auto&& it : _letters)
     {
-        it.second->updateDisplayedColor(_displayedColor);;
+        it.second->updateDisplayedColor(_displayedColor);
     }
 }
 
@@ -1942,7 +1941,7 @@ void Label::updateDisplayedOpacity(GLubyte parentOpacity)
 
     for (auto&& it : _letters)
     {
-        it.second->updateDisplayedOpacity(_displayedOpacity);;
+        it.second->updateDisplayedOpacity(_displayedOpacity);
     }
 }
 
