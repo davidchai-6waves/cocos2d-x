@@ -305,7 +305,7 @@ void TextureCache::addImageAsyncCallBack(float dt)
                 VolatileTextureMgr::addImageTexture(texture, asyncStruct->filename);
 #endif
                 // cache the texture. retain it, since it is added in the map
-                _textures.emplace(asyncStruct->filename, texture);
+                _textures.insert(std::make_pair(asyncStruct->filename, texture));
                 texture->retain();
 
                 texture->autorelease();
@@ -378,7 +378,7 @@ Texture2D * TextureCache::addImage(const std::string &path)
                 VolatileTextureMgr::addImageTexture(texture, fullpath);
 #endif
                 // texture already retained, no need to re-retain it
-                _textures.emplace(fullpath, texture);
+                _textures.insert(std::make_pair(fullpath, texture));
 
                 //-- ANDROID ETC1 ALPHA SUPPORTS.
                 std::string alphaFullPath = path + s_etc1AlphaFileSuffix;
@@ -444,7 +444,7 @@ Texture2D* TextureCache::addImage(Image *image, const std::string &key)
         {
             if (texture->initWithImage(image))
             {
-                _textures.emplace(key, texture);
+                _textures.insert(std::make_pair(key, texture));
             }
             else
             {
@@ -669,7 +669,7 @@ void TextureCache::renameTextureWithKey(const std::string& srcName, const std::s
             if (ret)
             {
                 tex->initWithImage(image);
-                _textures.emplace(fullpath, tex);
+                _textures.insert(std::make_pair(fullpath, tex));
                 _textures.erase(it);
             }
             CC_SAFE_DELETE(image);

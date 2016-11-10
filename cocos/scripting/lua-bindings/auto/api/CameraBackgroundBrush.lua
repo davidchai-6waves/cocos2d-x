@@ -15,7 +15,7 @@
 -- draw the background
 -- @function [parent=#CameraBackgroundBrush] drawBackground 
 -- @param self
--- @param #cc.Camera 
+-- @param #cc.Camera camera
 -- @return CameraBackgroundBrush#CameraBackgroundBrush self (return value: cc.CameraBackgroundBrush)
         
 --------------------------------

@@ -86,7 +86,6 @@
     textInput.ccui_placeholder = _textInput.ccui_placeholder ?: @"";
     textInput.ccui_font = _textInput.ccui_font ?: [NSFont systemFontOfSize:self.frameRect.size.height*3/2];
     textInput.ccui_maxLength = getEditBoxImplMac()->getMaxLength();
-    textInput.ccui_alignment = _textInput.ccui_alignment;
     
     [_textInput removeFromSuperview];
     [_textInput release];
@@ -172,8 +171,8 @@
 - (void)controlTextDidEndEditing:(NSNotification *)notification
 {
     _editState = NO;
-
-    getEditBoxImplMac()->editBoxEditingDidEnd([self getText], [self getEndAction:notification]);
+    
+    getEditBoxImplMac()->editBoxEditingDidEnd([self getText]);
 }
 
 - (void)setMaxLength:(int)length
@@ -257,14 +256,6 @@
     CCLOG("setReturnType not implemented");
 }
 
-- (void)setTextHorizontalAlignment:(cocos2d::TextHAlignment)alignment
-{
-    // swizzle center & right, for some reason they're backwards on !TARGET_OS_IPHONE
-    if (alignment == cocos2d::TextHAlignment::CENTER) alignment = cocos2d::TextHAlignment::RIGHT;
-    else if (alignment == cocos2d::TextHAlignment::RIGHT) alignment = cocos2d::TextHAlignment::CENTER;
-    self.textInput.ccui_alignment = static_cast<NSTextAlignment>(alignment);
-}
-
 - (void)setPlaceHolder:(const char *)text
 {
     self.textInput.ccui_placeholder = [NSString stringWithUTF8String:text];
@@ -312,22 +303,8 @@
 - (void)textDidEndEditing:(NSNotification *)notification
 {
     _editState = NO;
-
-    getEditBoxImplMac()->editBoxEditingDidEnd([self getText], [self getEndAction:notification]);
-}
-
-- (cocos2d::ui::EditBoxDelegate::EditBoxEndAction)getEndAction:(NSNotification *)notification
-{
-    auto type = cocos2d::ui::EditBoxDelegate::EditBoxEndAction::UNKNOWN;
-    NSUInteger reasonForEnding = [[[notification userInfo] objectForKey:@"NSTextMovement"] unsignedIntValue];
-    if (reasonForEnding == NSTabTextMovement) {
-        type = cocos2d::ui::EditBoxDelegate::EditBoxEndAction::TAB_TO_NEXT;
-    } else if (reasonForEnding == NSBacktabTextMovement) {
-        type = cocos2d::ui::EditBoxDelegate::EditBoxEndAction::TAB_TO_PREVIOUS;
-    } else if (reasonForEnding == NSReturnTextMovement) {
-        type = cocos2d::ui::EditBoxDelegate::EditBoxEndAction::RETURN;
-    }
-    return type;
+    
+    getEditBoxImplMac()->editBoxEditingDidEnd([self getText]);
 }
 
 - (void)textDidChange:(NSNotification *)notification

@@ -69,7 +69,7 @@ std::string PUObjectAbstractNode::getValue() const
 
 void PUObjectAbstractNode::addVariable(const std::string &inName)
 {
-    _env.emplace(inName, "");
+    _env.insert(std::make_pair(inName, ""));
 }
 
 void PUObjectAbstractNode::setVariable(const std::string &inName, const std::string &value)

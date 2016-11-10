@@ -162,7 +162,7 @@ public:
     }
     
     //LabelLetter doesn't need to draw directly.
-    void draw(Renderer* /*renderer*/, const Mat4 & /*transform*/, uint32_t /*flags*/) override
+    void draw(Renderer *renderer, const Mat4 &transform, uint32_t flags) override
     {
     }
     
@@ -317,10 +317,8 @@ bool Label::setCharMap(const std::string& plistFile)
 }
 
 
-bool Label::initWithTTF(const std::string& text,
-                        const std::string& fontFilePath, float fontSize,
-                        const Size& dimensions,
-                        TextHAlignment /*hAlignment*/, TextVAlignment /*vAlignment*/)
+bool Label::initWithTTF(const std::string& text, const std::string& fontFilePath, float fontSize,
+                        const Size& dimensions, TextHAlignment hAlignment, TextVAlignment vAlignment)
 {
     if (FileUtils::getInstance()->isFileExist(fontFilePath))
     {
@@ -335,7 +333,7 @@ bool Label::initWithTTF(const std::string& text,
     return false;
 }
 
-bool Label::initWithTTF(const TTFConfig& ttfConfig, const std::string& text, TextHAlignment /*hAlignment*/, int maxLineWidth)
+bool Label::initWithTTF(const TTFConfig& ttfConfig, const std::string& text, TextHAlignment hAlignment, int maxLineWidth)
 {
     if (FileUtils::getInstance()->isFileExist(ttfConfig.fontFilePath) && setTTFConfig(ttfConfig))
     {
@@ -900,6 +898,7 @@ bool Label::updateQuads()
         batchNode->getTextureAtlas()->removeAllQuads();
     }
     
+    bool letterClamp = false;
     for (int ctr = 0; ctr < _lengthOfString; ++ctr)
     {
         if (_lettersInfo[ctr].valid)
@@ -935,6 +934,7 @@ bool Label::updateQuads()
                         _reusedRect.size.width = 0;
                     }else if(_overflow == Overflow::SHRINK){
                         if (_contentSize.width > letterDef.width) {
+                            letterClamp = true;
                             ret = false;
                             break;
                         }else{
@@ -1089,9 +1089,7 @@ void Label::enableOutline(const Color4B& outlineColor,int outlineSize /* = -1 */
     }
 }
 
-void Label::enableShadow(const Color4B& shadowColor /* = Color4B::BLACK */,
-                         const Size &offset /* = Size(2 ,-2)*/,
-                         int /* blurRadius = 0 */)
+void Label::enableShadow(const Color4B& shadowColor /* = Color4B::BLACK */,const Size &offset /* = Size(2 ,-2)*/, int blurRadius /* = 0 */)
 {
     _shadowEnabled = true;
     _shadowDirty = true;
@@ -1512,7 +1510,7 @@ void Label::onDrawShadow(GLProgram* glProgram, const Color4F& shadowColor)
     }
 }
 
-void Label::onDraw(const Mat4& transform, bool /*transformUpdated*/)
+void Label::onDraw(const Mat4& transform, bool transformUpdated)
 {
     auto glprogram = getGLProgram();
     glprogram->use();

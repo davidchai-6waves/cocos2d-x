@@ -193,12 +193,8 @@ bool ControlSwitchSprite::initWithMaskSprite(
         
         clipper->addChild(onSprite);
         clipper->addChild(offSprite);
-        if (onLabel) {
-            clipper->addChild(onLabel); // might be null
-        }
-        if (offLabel) {
-            clipper->addChild(offLabel); // might be null
-        }
+        clipper->addChild(onLabel);
+        clipper->addChild(offLabel);
         clipper->addChild(thumbSprite);
         
         addChild(clipper);

@@ -1634,16 +1634,6 @@ str
 },
 
 /**
- * @method update
- * @param {float} arg0
- */
-update : function (
-float 
-)
-{
-},
-
-/**
  * @method getDisplayedOpacity
  * @return {unsigned char}
  */
@@ -2051,15 +2041,13 @@ vec3
 },
 
 /**
- * @method getNumberOfRunningActionsByTag
- * @param {int} arg0
- * @return {int}
+ * @method update
+ * @param {float} arg0
  */
-getNumberOfRunningActionsByTag : function (
-int 
+update : function (
+float 
 )
 {
-    return 0;
 },
 
 /**
@@ -10748,16 +10736,6 @@ action
 },
 
 /**
- * @method pauseAllRunningActions
- * @return {Array}
- */
-pauseAllRunningActions : function (
-)
-{
-    return new Array();
-},
-
-/**
  * @method removeAllActionsByTag
  * @param {int} arg0
  * @param {cc.Node} arg1
@@ -10770,17 +10748,13 @@ node
 },
 
 /**
- * @method getNumberOfRunningActionsInTargetByTag
- * @param {cc.Node} arg0
- * @param {int} arg1
- * @return {unsigned long}
+ * @method pauseAllRunningActions
+ * @return {Array}
  */
-getNumberOfRunningActionsInTargetByTag : function (
-node, 
-int 
+pauseAllRunningActions : function (
 )
 {
-    return 0;
+    return new Array();
 },
 
 /**
@@ -11989,10 +11963,10 @@ color4f
 
 /**
  * @method setLineWidth
- * @param {float} arg0
+ * @param {int} arg0
  */
 setLineWidth : function (
-float 
+int 
 )
 {
 },

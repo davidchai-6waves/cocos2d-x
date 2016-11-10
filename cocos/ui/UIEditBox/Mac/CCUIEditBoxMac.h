@@ -57,7 +57,6 @@
 - (void)closeKeyboard;
 
 - (NSString *)getDefaultFontName;
-- (cocos2d::ui::EditBoxDelegate::EditBoxEndAction)getEndAction:(NSNotification *)notification;
 
 - (void)setInputMode:(cocos2d::ui::EditBox::InputMode)inputMode;
 - (void)setInputFlag:(cocos2d::ui::EditBox::InputFlag)inputFlag;

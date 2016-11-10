@@ -909,7 +909,6 @@ bool js_cocos2dx_ui_EditBox_setInputFlag(JSContext *cx, uint32_t argc, jsval *vp
 bool js_cocos2dx_ui_EditBox_getMaxLength(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_cocos2dx_ui_EditBox_setMaxLength(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_cocos2dx_ui_EditBox_setFont(JSContext *cx, uint32_t argc, jsval *vp);
-bool js_cocos2dx_ui_EditBox_setTextHorizontalAlignment(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_cocos2dx_ui_EditBox_create(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_cocos2dx_ui_EditBox_EditBox(JSContext *cx, uint32_t argc, jsval *vp);
 
