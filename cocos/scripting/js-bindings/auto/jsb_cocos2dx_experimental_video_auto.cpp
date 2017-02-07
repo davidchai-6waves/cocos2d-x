@@ -75,26 +75,6 @@ bool js_cocos2dx_experimental_video_VideoPlayer_play(JSContext *cx, uint32_t arg
     JS_ReportError(cx, "js_cocos2dx_experimental_video_VideoPlayer_play : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_cocos2dx_experimental_video_VideoPlayer_setPlaybackControlEnabled(JSContext *cx, uint32_t argc, jsval *vp)
-{
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true;
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(obj);
-    cocos2d::experimental::ui::VideoPlayer* cobj = (cocos2d::experimental::ui::VideoPlayer *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_experimental_video_VideoPlayer_setPlaybackControlEnabled : Invalid Native Object");
-    if (argc == 1) {
-        bool arg0;
-        arg0 = JS::ToBoolean(args.get(0));
-        JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_experimental_video_VideoPlayer_setPlaybackControlEnabled : Error processing arguments");
-        cobj->setPlaybackControlEnabled(arg0);
-        args.rval().setUndefined();
-        return true;
-    }
-
-    JS_ReportError(cx, "js_cocos2dx_experimental_video_VideoPlayer_setPlaybackControlEnabled : wrong number of arguments: %d, was expecting %d", argc, 1);
-    return false;
-}
 bool js_cocos2dx_experimental_video_VideoPlayer_setKeepAspectRatioEnabled(JSContext *cx, uint32_t argc, jsval *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
@@ -139,18 +119,16 @@ bool js_cocos2dx_experimental_video_VideoPlayer_setFullScreenEnabled(JSContext *
     js_proxy_t *proxy = jsb_get_js_proxy(obj);
     cocos2d::experimental::ui::VideoPlayer* cobj = (cocos2d::experimental::ui::VideoPlayer *)(proxy ? proxy->ptr : NULL);
     JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_experimental_video_VideoPlayer_setFullScreenEnabled : Invalid Native Object");
-    if (argc == 2) {
+    if (argc == 1) {
         bool arg0;
-        bool arg1;
         arg0 = JS::ToBoolean(args.get(0));
-        arg1 = JS::ToBoolean(args.get(1));
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_experimental_video_VideoPlayer_setFullScreenEnabled : Error processing arguments");
-        cobj->setFullScreenEnabled(arg0, arg1);
+        cobj->setFullScreenEnabled(arg0);
         args.rval().setUndefined();
         return true;
     }
 
-    JS_ReportError(cx, "js_cocos2dx_experimental_video_VideoPlayer_setFullScreenEnabled : wrong number of arguments: %d, was expecting %d", argc, 2);
+    JS_ReportError(cx, "js_cocos2dx_experimental_video_VideoPlayer_setFullScreenEnabled : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
 bool js_cocos2dx_experimental_video_VideoPlayer_setFileName(JSContext *cx, uint32_t argc, jsval *vp)
@@ -209,42 +187,6 @@ bool js_cocos2dx_experimental_video_VideoPlayer_isKeepAspectRatioEnabled(JSConte
     }
 
     JS_ReportError(cx, "js_cocos2dx_experimental_video_VideoPlayer_isKeepAspectRatioEnabled : wrong number of arguments: %d, was expecting %d", argc, 0);
-    return false;
-}
-bool js_cocos2dx_experimental_video_VideoPlayer_isPlaybackControlEnabled(JSContext *cx, uint32_t argc, jsval *vp)
-{
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(obj);
-    cocos2d::experimental::ui::VideoPlayer* cobj = (cocos2d::experimental::ui::VideoPlayer *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_experimental_video_VideoPlayer_isPlaybackControlEnabled : Invalid Native Object");
-    if (argc == 0) {
-        bool ret = cobj->isPlaybackControlEnabled();
-        jsval jsret = JSVAL_NULL;
-        jsret = BOOLEAN_TO_JSVAL(ret);
-        args.rval().set(jsret);
-        return true;
-    }
-
-    JS_ReportError(cx, "js_cocos2dx_experimental_video_VideoPlayer_isPlaybackControlEnabled : wrong number of arguments: %d, was expecting %d", argc, 0);
-    return false;
-}
-bool js_cocos2dx_experimental_video_VideoPlayer_isFullScreenAnimationEnabled(JSContext *cx, uint32_t argc, jsval *vp)
-{
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(obj);
-    cocos2d::experimental::ui::VideoPlayer* cobj = (cocos2d::experimental::ui::VideoPlayer *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_experimental_video_VideoPlayer_isFullScreenAnimationEnabled : Invalid Native Object");
-    if (argc == 0) {
-        bool ret = cobj->isFullScreenAnimationEnabled();
-        jsval jsret = JSVAL_NULL;
-        jsret = BOOLEAN_TO_JSVAL(ret);
-        args.rval().set(jsret);
-        return true;
-    }
-
-    JS_ReportError(cx, "js_cocos2dx_experimental_video_VideoPlayer_isFullScreenAnimationEnabled : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
 bool js_cocos2dx_experimental_video_VideoPlayer_onPlayEvent(JSContext *cx, uint32_t argc, jsval *vp)
@@ -377,15 +319,12 @@ void js_register_cocos2dx_experimental_video_VideoPlayer(JSContext *cx, JS::Hand
         JS_FN("getFileName", js_cocos2dx_experimental_video_VideoPlayer_getFileName, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("getURL", js_cocos2dx_experimental_video_VideoPlayer_getURL, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("play", js_cocos2dx_experimental_video_VideoPlayer_play, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("setPlaybackControlEnabled", js_cocos2dx_experimental_video_VideoPlayer_setPlaybackControlEnabled, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("setKeepAspectRatioEnabled", js_cocos2dx_experimental_video_VideoPlayer_setKeepAspectRatioEnabled, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("stop", js_cocos2dx_experimental_video_VideoPlayer_stop, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("setFullScreenEnabled", js_cocos2dx_experimental_video_VideoPlayer_setFullScreenEnabled, 2, JSPROP_PERMANENT | JSPROP_ENUMERATE),
+        JS_FN("setFullScreenEnabled", js_cocos2dx_experimental_video_VideoPlayer_setFullScreenEnabled, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("setFileName", js_cocos2dx_experimental_video_VideoPlayer_setFileName, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("setURL", js_cocos2dx_experimental_video_VideoPlayer_setURL, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("isKeepAspectRatioEnabled", js_cocos2dx_experimental_video_VideoPlayer_isKeepAspectRatioEnabled, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("isPlaybackControlEnabled", js_cocos2dx_experimental_video_VideoPlayer_isPlaybackControlEnabled, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("isFullScreenAnimationEnabled", js_cocos2dx_experimental_video_VideoPlayer_isFullScreenAnimationEnabled, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("onPlayEvent", js_cocos2dx_experimental_video_VideoPlayer_onPlayEvent, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("isFullScreenEnabled", js_cocos2dx_experimental_video_VideoPlayer_isFullScreenEnabled, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("isPlaying", js_cocos2dx_experimental_video_VideoPlayer_isPlaying, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),

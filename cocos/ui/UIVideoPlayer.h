@@ -146,10 +146,9 @@ namespace experimental{
              * Causes the video player to enter or exit full-screen mode.
              * 
              * @param fullscreen    Specify true to enter full-screen mode or false to exit full-screen mode.
-             * @param animated      Specify true to enable animation when showing the video player
              */
-            virtual void setFullScreenEnabled(bool fullscreen, bool animated);
-            
+            virtual void setFullScreenEnabled(bool fullscreen);
+
             /**
              * Indicates whether the video player is in full-screen mode.
              *
@@ -175,14 +174,6 @@ namespace experimental{
             virtual void draw(Renderer *renderer, const Mat4& transform, uint32_t flags) override;
             virtual void onEnter() override;
             virtual void onExit() override;
-            /**
-             * Indicates whether the video player's playback control is enable.
-             *
-             * @param Set true to show the playback control
-             */
-            virtual void setPlaybackControlEnabled(bool enable);
-            virtual bool isFullScreenAnimationEnabled()const { return _isFullScreenAnimationEnabled; };
-            virtual bool isPlaybackControlEnabled()const { return _isPlaybackControlEnabled; };
 
         protected:
             virtual cocos2d::ui::Widget* createCloneInstance() override;
@@ -207,8 +198,6 @@ namespace experimental{
             bool _fullScreenDirty;
             bool _fullScreenEnabled;
             bool _keepAspectRatioEnabled;
-            bool _isPlaybackControlEnabled;
-            bool _isFullScreenAnimationEnabled;
 
             std::string _videoURL;
             Source _videoSource;

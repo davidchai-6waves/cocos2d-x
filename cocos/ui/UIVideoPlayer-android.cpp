@@ -96,7 +96,7 @@ void VideoPlayer::setFileName(const std::string& fileName)
 {
     _videoURL = FileUtils::getInstance()->fullPathForFilename(fileName);
     _videoSource = VideoPlayer::Source::FILENAME;
-    JniHelper::callStaticVoidMethod(videoHelperClassName, "setVideoUrl", _videoPlayerIndex,
+    JniHelper::callStaticVoidMethod(videoHelperClassName, "setVideoUrl", _videoPlayerIndex, 
                                     (int)Source::FILENAME,_videoURL);
 }
 
@@ -115,7 +115,7 @@ void VideoPlayer::draw(Renderer* renderer, const Mat4 &transform, uint32_t flags
     if (flags & FLAGS_TRANSFORM_DIRTY)
     {
         auto uiRect = cocos2d::ui::Helper::convertBoundingBoxToScreen(this);
-        JniHelper::callStaticVoidMethod(videoHelperClassName, "setVideoRect", _videoPlayerIndex,
+        JniHelper::callStaticVoidMethod(videoHelperClassName, "setVideoRect", _videoPlayerIndex, 
                                         (int)uiRect.origin.x, (int)uiRect.origin.y,
                                         (int)uiRect.size.width, (int)uiRect.size.height);
     }
@@ -134,14 +134,14 @@ void VideoPlayer::draw(Renderer* renderer, const Mat4 &transform, uint32_t flags
 #endif
 }
 
-void VideoPlayer::setFullScreenEnabled(bool enabled, bool animated)
+void VideoPlayer::setFullScreenEnabled(bool enabled)
 {
     if (_fullScreenEnabled != enabled)
     {
         _fullScreenEnabled = enabled;
-        _isFullScreenAnimationEnabled = animated;
+
         auto frameSize = Director::getInstance()->getOpenGLView()->getFrameSize();
-        JniHelper::callStaticVoidMethod(videoHelperClassName, "setFullScreenEnabled", _videoPlayerIndex,
+        JniHelper::callStaticVoidMethod(videoHelperClassName, "setFullScreenEnabled", _videoPlayerIndex, 
                                         enabled, (int)frameSize.width, (int)frameSize.height);
     }
 }
@@ -157,14 +157,6 @@ void VideoPlayer::setKeepAspectRatioEnabled(bool enable)
     {
         _keepAspectRatioEnabled = enable;
         JniHelper::callStaticVoidMethod(videoHelperClassName, "setVideoKeepRatioEnabled", _videoPlayerIndex, enable);
-    }
-}
-void VideoPlayer::setPlaybackControlEnabled(bool enable)
-{
-    if (_isPlaybackControlEnabled != enable)
-    {
-        _isPlaybackControlEnabled != enable;
-        JniHelper::callStaticVoidMethod(videoHelperClassName, "setPlaybackControlEnabled", _videoPlayerIndex, enable);
     }
 }
 
@@ -273,7 +265,7 @@ void VideoPlayer::onPlayEvent(int event)
     if (event == QUIT_FULLSCREEN)
     {
         _fullScreenEnabled = false;
-    }
+    } 
     else
     {
         VideoPlayer::EventType videoEvent = (VideoPlayer::EventType)event;
@@ -309,8 +301,6 @@ void VideoPlayer::copySpecialProperties(Widget *widget)
         _videoPlayerIndex = videoPlayer->_videoPlayerIndex;
         _eventCallback = videoPlayer->_eventCallback;
         _videoView = videoPlayer->_videoView;
-        _isFullScreenAnimationEnabled = videoPlayer->_isFullScreenAnimationEnabled;
-        _isPlaybackControlEnabled = videoPlayer->_isPlaybackControlEnabled;
     }
 }
 

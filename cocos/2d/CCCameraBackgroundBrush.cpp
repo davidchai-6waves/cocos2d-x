@@ -129,7 +129,7 @@ bool CameraBackgroundDepthBrush::init()
     return true;
 }
 
-void CameraBackgroundDepthBrush::drawBackground(Camera* camera)
+void CameraBackgroundDepthBrush::drawBackground(Camera* /*camera*/)
 {
     GLboolean oldDepthTest;
     GLint oldDepthFunc;

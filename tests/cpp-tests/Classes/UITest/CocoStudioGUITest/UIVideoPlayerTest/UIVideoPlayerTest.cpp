@@ -79,7 +79,7 @@ void VideoPlayerTest::menuFullScreenCallback(Ref* sender)
 {
     if (_videoPlayer)
     {
-        _videoPlayer->setFullScreenEnabled(! _videoPlayer->isFullScreenEnabled(), _videoPlayer->isFullScreenAnimationEnabled());
+        _videoPlayer->setFullScreenEnabled(! _videoPlayer->isFullScreenEnabled());
     }
 }
 

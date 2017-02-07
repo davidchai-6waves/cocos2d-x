@@ -37,16 +37,6 @@ play : function (
 },
 
 /**
- * @method setPlaybackControlEnabled
- * @param {bool} arg0
- */
-setPlaybackControlEnabled : function (
-bool 
-)
-{
-},
-
-/**
  * @method setKeepAspectRatioEnabled
  * @param {bool} arg0
  */
@@ -67,10 +57,8 @@ stop : function (
 /**
  * @method setFullScreenEnabled
  * @param {bool} arg0
- * @param {bool} arg1
  */
 setFullScreenEnabled : function (
-bool, 
 bool 
 )
 {
@@ -101,26 +89,6 @@ str
  * @return {bool}
  */
 isKeepAspectRatioEnabled : function (
-)
-{
-    return false;
-},
-
-/**
- * @method isPlaybackControlEnabled
- * @return {bool}
- */
-isPlaybackControlEnabled : function (
-)
-{
-    return false;
-},
-
-/**
- * @method isFullScreenAnimationEnabled
- * @return {bool}
- */
-isFullScreenAnimationEnabled : function (
 )
 {
     return false;

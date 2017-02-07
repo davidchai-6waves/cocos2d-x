@@ -3238,7 +3238,7 @@ void LabelLocalizationTest::onChangedRadioButtonSelect(RadioButton* radioButton,
 LabelIssue15214::LabelIssue15214()
 {
     auto size = Director::getInstance()->getVisibleSize();
-    
+
     // 1
     Label* label = Label::createWithTTF("TTF with setColor()", "fonts/arial.ttf", 24.0f);
     label->enableUnderline();
