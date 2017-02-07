@@ -85,8 +85,8 @@ class HttpURLConnection
 {
 public:
     HttpURLConnection(HttpClient* httpClient)
-    :_httpURLConnection(nullptr)
-    ,_client(httpClient)
+    :_client(httpClient)
+    ,_httpURLConnection(nullptr)
     ,_requestmethod("")
     ,_responseCookies("")
     ,_cookieFileName("")
@@ -707,8 +707,11 @@ void HttpClient::processResponse(HttpResponse* response, char* responseMessage)
     free(contentInfo);
     
     char *messageInfo = urlConnection.getResponseMessage();
-    strcpy(responseMessage, messageInfo);
-    free(messageInfo);
+    if (messageInfo)
+    {
+        strcpy(responseMessage, messageInfo);
+        free(messageInfo);
+    }
 
     urlConnection.disconnect();
 
@@ -871,12 +874,12 @@ void HttpClient::setSSLVerification(const std::string& caFile)
 }
 
 HttpClient::HttpClient()
-: _timeoutForConnect(30)
+: _isInited(false)
+, _timeoutForConnect(30)
 , _timeoutForRead(60)
-, _isInited(false)
 , _threadCount(0)
-, _requestSentinel(new HttpRequest())
 , _cookie(nullptr)
+, _requestSentinel(new HttpRequest())
 {
     CCLOG("In the constructor of HttpClient!");
     increaseThreadCount();
@@ -890,7 +893,7 @@ HttpClient::~HttpClient()
 }
 
 //Lazy create semaphore & mutex & thread
-bool HttpClient::lazyInitThreadSemphore()
+bool HttpClient::lazyInitThreadSemaphore()
 {
     if (_isInited)
     {
@@ -909,7 +912,7 @@ bool HttpClient::lazyInitThreadSemphore()
 //Add a get task to queue
 void HttpClient::send(HttpRequest* request)
 {    
-    if (!lazyInitThreadSemphore()) 
+    if (!lazyInitThreadSemaphore()) 
     {
         return;
     }

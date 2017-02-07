@@ -30,7 +30,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 //  OC Classes Declaration
-#import <Foundation/NSData.h>
+#import <Foundation/Foundation.h>
 
 // this wrapper used to wrap C++ class DownloadTask into NSMutableDictionary
 @interface DownloadTaskWrapper : NSObject
@@ -321,7 +321,10 @@ namespace cocos2d { namespace network {
         }
     }
     _outer = nullptr;
-
+    
+    while(!_taskQueue.empty())
+        _taskQueue.pop();
+    
     [self.downloadSession invalidateAndCancel];
     [self release];
 }

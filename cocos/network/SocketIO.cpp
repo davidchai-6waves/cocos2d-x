@@ -31,6 +31,7 @@
 #include <algorithm>
 #include <sstream>
 #include <iterator>
+#include "base/ccUTF8.h"
 #include "base/CCDirector.h"
 #include "base/CCScheduler.h"
 #include "network/WebSocket.h"
@@ -101,7 +102,7 @@ private:
     std::vector<std::string> _typesMessage;
 };
 
-SocketIOPacket::SocketIOPacket() :_separator(":"), _endpointseparator("")
+SocketIOPacket::SocketIOPacket() :_endpointseparator(""), _separator(":")
 {
     _types.push_back("disconnect");
     _types.push_back("connect");
@@ -392,13 +393,10 @@ public:
 SIOClientImpl::SIOClientImpl(const std::string& host, int port) :
     _port(port),
     _host(host),
-    _connected(false)
+    _uri(host + ":" + StringUtils::toString(port)),
+    _connected(false),
+    _ws(nullptr)
 {
-    std::stringstream s;
-    s << host << ":" << port;
-    _uri = s.str();
-
-    _ws = nullptr;
 }
 
 SIOClientImpl::~SIOClientImpl()
@@ -432,10 +430,9 @@ void SIOClientImpl::handshake()
     return;
 }
 
-void SIOClientImpl::handshakeResponse(HttpClient *sender, HttpResponse *response)
+void SIOClientImpl::handshakeResponse(HttpClient* /*sender*/, HttpResponse *response)
 {
     CCLOGINFO("SIOClientImpl::handshakeResponse() called");
-    CC_UNUSED_PARAM(sender);
 
     if (0 != strlen(response->getHttpRequest()->getTag()))
     {
@@ -466,9 +463,9 @@ void SIOClientImpl::handshakeResponse(HttpClient *sender, HttpResponse *response
     std::stringstream s;
     s.str("");
 
-    for (unsigned int i = 0, size = buffer->size(); i < size; ++i)
+    for (const auto& iter : *buffer)
     {
-        s << (*buffer)[i];
+        s << iter;
     }
 
     CCLOGINFO("SIOClientImpl::handshake() dump data: %s", s.str().c_str());
@@ -666,9 +663,8 @@ void SIOClientImpl::disconnectFromEndpoint(const std::string& endpoint)
     }
 }
 
-void SIOClientImpl::heartbeat(float dt)
+void SIOClientImpl::heartbeat(float /*dt*/)
 {
-    CC_UNUSED_PARAM(dt);
     SocketIOPacket *packet = SocketIOPacket::createPacketWithType("heartbeat", _version);
 
     this->send(packet);
@@ -718,9 +714,8 @@ void SIOClientImpl::emit(const std::string& endpoint, const std::string& eventna
     this->send(packet);
 }
 
-void SIOClientImpl::onOpen(WebSocket* ws)
+void SIOClientImpl::onOpen(WebSocket* /*ws*/)
 {
-    CC_UNUSED_PARAM(ws);
     _connected = true;
 
     SocketIO::getInstance()->addSocket(_uri, this);
@@ -741,10 +736,9 @@ void SIOClientImpl::onOpen(WebSocket* ws)
     CCLOGINFO("SIOClientImpl::onOpen socket connected!");
 }
 
-void SIOClientImpl::onMessage(WebSocket* ws, const WebSocket::Data& data)
+void SIOClientImpl::onMessage(WebSocket* /*ws*/, const WebSocket::Data& data)
 {
     CCLOGINFO("SIOClientImpl::onMessage received: %s", data.bytes);
-    CC_UNUSED_PARAM(ws);
 
     std::string payload = data.bytes;
     int control = atoi(payload.substr(0, 1).c_str());
@@ -973,9 +967,8 @@ void SIOClientImpl::onMessage(WebSocket* ws, const WebSocket::Data& data)
     return;
 }
 
-void SIOClientImpl::onClose(WebSocket* ws)
+void SIOClientImpl::onClose(WebSocket* /*ws*/)
 {
-    CC_UNUSED_PARAM(ws);
     if (!_clients.empty())
     {
         for (auto& client : _clients)
@@ -993,9 +986,8 @@ void SIOClientImpl::onClose(WebSocket* ws)
     this->release();
 }
 
-void SIOClientImpl::onError(WebSocket* ws, const WebSocket::ErrorCode& error)
+void SIOClientImpl::onError(WebSocket* /*ws*/, const WebSocket::ErrorCode& error)
 {
-    CC_UNUSED_PARAM(ws);
     CCLOGERROR("Websocket error received: %d", static_cast<int>(error));
 }
 

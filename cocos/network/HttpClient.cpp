@@ -396,12 +396,12 @@ void HttpClient::setSSLVerification(const std::string& caFile)
 }
 
 HttpClient::HttpClient()
-: _timeoutForConnect(30)
+: _isInited(false)
+, _timeoutForConnect(30)
 , _timeoutForRead(60)
-, _isInited(false)
 , _threadCount(0)
-, _requestSentinel(new HttpRequest())
 , _cookie(nullptr)
+, _requestSentinel(new HttpRequest())
 {
 	CCLOG("In the constructor of HttpClient!");
 	memset(_responseMessage, 0, RESPONSE_BUFFER_SIZE * sizeof(char));
@@ -416,7 +416,7 @@ HttpClient::~HttpClient()
 }
 
 //Lazy create semaphore & mutex & thread
-bool HttpClient::lazyInitThreadSemphore()
+bool HttpClient::lazyInitThreadSemaphore()
 {
     if (_isInited)
 	{
@@ -435,7 +435,7 @@ bool HttpClient::lazyInitThreadSemphore()
 //Add a get task to queue
 void HttpClient::send(HttpRequest* request)
 {    
-    if (false == lazyInitThreadSemphore()) 
+    if (false == lazyInitThreadSemaphore()) 
     {
         return;
     }

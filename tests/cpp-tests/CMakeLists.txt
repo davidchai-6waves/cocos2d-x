@@ -1,6 +1,12 @@
 set(APP_NAME cpp-tests)
 
 # Use same method as in cocos library
+if(LINUX)
+  foreach(_pkg FONTCONFIG GTK3)
+    cocos_find_package(${_pkg} ${_pkg} REQUIRED)
+  endforeach()
+endif()
+cocos_find_package(FREETYPE FREETYPE REQUIRED)
 cocos_find_package(CURL CURL REQUIRED)
 
 if(WIN32)
@@ -194,15 +200,16 @@ if(USE_BULLET)
     )
 endif()
 
-if(LINUX)
-    set(EXTENDED_TESTS_SRC
+set (EXTENDED_TESTS_SRC
+      Classes/ExtensionsTest/NetworkTest/HttpClientTest.cpp
+      Classes/ExtensionsTest/NetworkTest/SocketIOTest.cpp
+      Classes/ExtensionsTest/NetworkTest/WebSocketTest.cpp
     )
-else()
-    set(EXTENDED_TESTS_SRC
-        Classes/ExtensionsTest/NetworkTest/HttpClientTest.cpp
-        Classes/ExtensionsTest/NetworkTest/SocketIOTest.cpp
-        Classes/ExtensionsTest/NetworkTest/WebSocketTest.cpp
 
+if(LINUX)
+
+else()
+    list(APPEND EXTENDED_TESTS_SRC
         Classes/UITest/CocoStudioGUITest/UIEditBoxTest.cpp
     )
 endif()
@@ -224,7 +231,14 @@ endif()
 
 target_link_libraries(${APP_NAME} cocos2d)
 
-cocos_use_pkg(${APP_NAME} CURL)
+if(LINUX)
+  foreach(_pkg FONTCONFIG GTK3)
+    cocos_use_pkg(${APP_NAME} ${_pkg})
+  endforeach()
+endif()
+foreach(pkg FREETYPE CURL)
+  cocos_use_pkg(${APP_NAME} ${pkg})
+endforeach()
 
 if(MACOSX OR APPLE)
   set_target_properties(${APP_NAME} PROPERTIES

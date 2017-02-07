@@ -83,14 +83,6 @@ getMaxS : function (
 },
 
 /**
- * @method releaseGLTexture
- */
-releaseGLTexture : function (
-)
-{
-},
-
-/**
  * @method hasPremultipliedAlpha
  * @return {bool}
  */
@@ -98,6 +90,16 @@ hasPremultipliedAlpha : function (
 )
 {
     return false;
+},
+
+/**
+ * @method getPixelsHigh
+ * @return {int}
+ */
+getPixelsHigh : function (
+)
+{
+    return 0;
 },
 
 /**
@@ -118,16 +120,6 @@ int
 )
 {
     return false;
-},
-
-/**
- * @method getPixelsHigh
- * @return {int}
- */
-getPixelsHigh : function (
-)
-{
-    return 0;
 },
 
 /**
@@ -253,6 +245,16 @@ generateMipmap : function (
 },
 
 /**
+ * @method getAlphaTexture
+ * @return {cc.Texture2D}
+ */
+getAlphaTexture : function (
+)
+{
+    return cc.Texture2D;
+},
+
+/**
  * @method getDescription
  * @return {String}
  */
@@ -280,6 +282,14 @@ getContentSizeInPixels : function (
 )
 {
     return cc.Size;
+},
+
+/**
+ * @method releaseGLTexture
+ */
+releaseGLTexture : function (
+)
+{
 },
 
 /**
@@ -3428,6 +3438,14 @@ int
  */
 performFunctionInCocosThread : function (
 func 
+)
+{
+},
+
+/**
+ * @method removeAllFunctionsToBePerformedInCocosThread
+ */
+removeAllFunctionsToBePerformedInCocosThread : function (
 )
 {
 },
@@ -7041,26 +7059,28 @@ str
 
 /**
  * @method getStringFromFile
- * @param {String} arg0
- * @return {String}
- */
-getStringFromFile : function (
-str 
+* @param {String|String} str
+* @param {function} func
+* @return {String}
+*/
+getStringFromFile : function(
+str,
+func 
 )
 {
-    return ;
 },
 
 /**
  * @method removeFile
- * @param {String} arg0
- * @return {bool}
- */
-removeFile : function (
-str 
+* @param {String|String} str
+* @param {function} func
+* @return {bool}
+*/
+removeFile : function(
+str,
+func 
 )
 {
-    return false;
 },
 
 /**
@@ -7077,18 +7097,19 @@ str
 
 /**
  * @method renameFile
-* @param {String|String} str
-* @param {String|String} str
-* @param {String} str
+* @param {String|String|String|String} str
+* @param {String|String|String|String} str
+* @param {String|String|function} str
+* @param {function} func
 * @return {bool|bool}
 */
 renameFile : function(
 str,
 str,
-str 
+str,
+func 
 )
 {
-    return false;
 },
 
 /**
@@ -7148,6 +7169,18 @@ str
 },
 
 /**
+ * @method getNewFilename
+ * @param {String} arg0
+ * @return {String}
+ */
+getNewFilename : function (
+str 
+)
+{
+    return ;
+},
+
+/**
  * @method getValueMapFromFile
  * @param {String} arg0
  * @return {map_object}
@@ -7161,14 +7194,15 @@ str
 
 /**
  * @method getFileSize
- * @param {String} arg0
- * @return {long}
- */
-getFileSize : function (
-str 
+* @param {String|String} str
+* @param {function} func
+* @return {long}
+*/
+getFileSize : function(
+str,
+func 
 )
 {
-    return 0;
 },
 
 /**
@@ -7187,14 +7221,15 @@ int
 
 /**
  * @method removeDirectory
- * @param {String} arg0
- * @return {bool}
- */
-removeDirectory : function (
-str 
+* @param {String|String} str
+* @param {function} func
+* @return {bool}
+*/
+removeDirectory : function(
+str,
+func 
 )
 {
-    return false;
 },
 
 /**
@@ -7209,16 +7244,17 @@ array
 
 /**
  * @method writeStringToFile
- * @param {String} arg0
- * @param {String} arg1
- * @return {bool}
- */
-writeStringToFile : function (
-str, 
-str 
+* @param {String|String} str
+* @param {String|String} str
+* @param {function} func
+* @return {bool}
+*/
+writeStringToFile : function(
+str,
+str,
+func 
 )
 {
-    return false;
 },
 
 /**
@@ -7257,28 +7293,30 @@ bool
 
 /**
  * @method writeValueVectorToFile
- * @param {Array} arg0
- * @param {String} arg1
- * @return {bool}
- */
-writeValueVectorToFile : function (
-array, 
-str 
+* @param {Array|Array} array
+* @param {String|String} str
+* @param {function} func
+* @return {bool}
+*/
+writeValueVectorToFile : function(
+array,
+str,
+func 
 )
 {
-    return false;
 },
 
 /**
  * @method isFileExist
- * @param {String} arg0
- * @return {bool}
- */
-isFileExist : function (
-str 
+* @param {String|String} str
+* @param {function} func
+* @return {bool}
+*/
+isFileExist : function(
+str,
+func 
 )
 {
-    return false;
 },
 
 /**
@@ -7317,16 +7355,17 @@ str
 
 /**
  * @method writeValueMapToFile
- * @param {map_object} arg0
- * @param {String} arg1
- * @return {bool}
- */
-writeValueMapToFile : function (
-map, 
-str 
+* @param {map_object|map_object} map
+* @param {String|String} str
+* @param {function} func
+* @return {bool}
+*/
+writeValueMapToFile : function(
+map,
+str,
+func 
 )
 {
-    return false;
 },
 
 /**
@@ -7363,14 +7402,15 @@ bool
 
 /**
  * @method isDirectoryExist
- * @param {String} arg0
- * @return {bool}
- */
-isDirectoryExist : function (
-str 
+* @param {String|String} str
+* @param {function} func
+* @return {bool}
+*/
+isDirectoryExist : function(
+str,
+func 
 )
 {
-    return false;
 },
 
 /**
@@ -7395,14 +7435,15 @@ getSearchResolutionsOrder : function (
 
 /**
  * @method createDirectory
- * @param {String} arg0
- * @return {bool}
- */
-createDirectory : function (
-str 
+* @param {String|String} str
+* @param {function} func
+* @return {bool}
+*/
+createDirectory : function(
+str,
+func 
 )
 {
-    return false;
 },
 
 /**
@@ -7566,20 +7607,6 @@ node
 },
 
 /**
- * @method addCustomEventListener
- * @param {String} arg0
- * @param {function} arg1
- * @return {cc.EventListenerCustom}
- */
-addCustomEventListener : function (
-str, 
-func 
-)
-{
-    return cc.EventListenerCustom;
-},
-
-/**
  * @method addEventListenerWithFixedPriority
  * @param {cc.EventListener} arg0
  * @param {int} arg1
@@ -7635,6 +7662,18 @@ dispatchEvent : function (
 event 
 )
 {
+},
+
+/**
+ * @method hasEventListener
+ * @param {std::basic_string<char>} arg0
+ * @return {bool}
+ */
+hasEventListener : function (
+basic_string<char> 
+)
+{
+    return false;
 },
 
 /**
@@ -7728,18 +7767,6 @@ func
 },
 
 /**
- * @method create
- * @param {function} arg0
- * @return {cc.EventListenerAcceleration}
- */
-create : function (
-func 
-)
-{
-    return cc.EventListenerAcceleration;
-},
-
-/**
  * @method EventListenerAcceleration
  * @constructor
  */
@@ -7754,20 +7781,6 @@ EventListenerAcceleration : function (
  * @class EventListenerCustom
  */
 cc.EventListenerCustom = {
-
-/**
- * @method create
- * @param {String} arg0
- * @param {function} arg1
- * @return {cc.EventListenerCustom}
- */
-create : function (
-str, 
-func 
-)
-{
-    return cc.EventListenerCustom;
-},
 
 /**
  * @method EventListenerCustom
@@ -12481,7 +12494,7 @@ isWrapEnabled : function (
 
 /**
  * @method getOutlineSize
- * @return {int}
+ * @return {float}
  */
 getOutlineSize : function (
 )
@@ -17340,6 +17353,16 @@ rect
 },
 
 /**
+ * @method isStretchEnabled
+ * @return {bool}
+ */
+isStretchEnabled : function (
+)
+{
+    return false;
+},
+
+/**
  * @method setTextureRect
 * @param {rect_object|rect_object} rect
 * @param {bool} bool
@@ -17363,6 +17386,16 @@ str
 )
 {
     return false;
+},
+
+/**
+ * @method setStretchEnabled
+ * @param {bool} arg0
+ */
+setStretchEnabled : function (
+bool 
+)
+{
 },
 
 /**
@@ -21540,12 +21573,14 @@ removeAllTextures : function (
 
 /**
  * @method addImageAsync
- * @param {String} arg0
- * @param {function} arg1
- */
-addImageAsync : function (
-str, 
-func 
+* @param {String|String} str
+* @param {function|function} func
+* @param {String} str
+*/
+addImageAsync : function(
+str,
+func,
+str 
 )
 {
 },
@@ -21664,6 +21699,16 @@ setETC1AlphaFileSuffix : function (
 str 
 )
 {
+},
+
+/**
+ * @method getETC1AlphaFileSuffix
+ * @return {String}
+ */
+getETC1AlphaFileSuffix : function (
+)
+{
+    return ;
 },
 
 /**

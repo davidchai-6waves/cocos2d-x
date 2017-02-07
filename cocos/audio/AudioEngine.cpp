@@ -70,17 +70,12 @@ AudioEngine::AudioEngineThreadPool* AudioEngine::s_threadPool = nullptr;
 class AudioEngine::AudioEngineThreadPool
 {
 public:
-    AudioEngineThreadPool(bool detach, int threads = 4)
-        : _detach(detach)
-        , _stop(false)
+    AudioEngineThreadPool(int threads = 4)
+        : _stop(false)
     {
         for (int index = 0; index < threads; ++index)
         {
             _workers.emplace_back(std::thread(std::bind(&AudioEngineThreadPool::threadFunc, this)));
-            if (_detach)
-            {
-                _workers[index].detach();
-            }
         }
     }
 
@@ -98,11 +93,8 @@ public:
             _taskCondition.notify_all();
         }
 
-        if (!_detach)
-        {
-            for (auto&& worker : _workers) {
-                worker.join();
-            }
+        for (auto&& worker : _workers) {
+            worker.join();
         }
     }
 
@@ -138,7 +130,6 @@ private:
 
     std::mutex _queueMutex;
     std::condition_variable _taskCondition;
-    bool _detach;
     bool _stop;
 };
 
@@ -169,15 +160,10 @@ bool AudioEngine::lazyInit()
         }
     }
 
-#if CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
+#if (CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID)
     if (_audioEngineImpl && s_threadPool == nullptr)
     {
-        s_threadPool = new (std::nothrow) AudioEngineThreadPool(true);
-    }
-#elif CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID
-    if (_audioEngineImpl && s_threadPool == nullptr)
-    {
-        s_threadPool = new (std::nothrow) AudioEngineThreadPool(false);
+        s_threadPool = new (std::nothrow) AudioEngineThreadPool();
     }
 #endif
 
@@ -407,7 +393,7 @@ void AudioEngine::uncacheAll()
 float AudioEngine::getDuration(int audioID)
 {
     auto it = _audioIDInfoMap.find(audioID);
-    if (it != _audioIDInfoMap.end() && it->second.state != AudioState::INITIALZING)
+    if (it != _audioIDInfoMap.end() && it->second.state != AudioState::INITIALIZING)
     {
         if (it->second.duration == TIME_UNKNOWN)
         {
@@ -422,7 +408,7 @@ float AudioEngine::getDuration(int audioID)
 bool AudioEngine::setCurrentTime(int audioID, float time)
 {
     auto it = _audioIDInfoMap.find(audioID);
-    if (it != _audioIDInfoMap.end() && it->second.state != AudioState::INITIALZING){
+    if (it != _audioIDInfoMap.end() && it->second.state != AudioState::INITIALIZING) {
         return _audioEngineImpl->setCurrentTime(audioID, time);
     }
 
@@ -432,7 +418,7 @@ bool AudioEngine::setCurrentTime(int audioID, float time)
 float AudioEngine::getCurrentTime(int audioID)
 {
     auto it = _audioIDInfoMap.find(audioID);
-    if (it != _audioIDInfoMap.end() && it->second.state != AudioState::INITIALZING){
+    if (it != _audioIDInfoMap.end() && it->second.state != AudioState::INITIALIZING) {
         return _audioEngineImpl->getCurrentTime(audioID);
     }
     return 0.0f;

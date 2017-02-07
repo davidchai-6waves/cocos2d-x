@@ -60,6 +60,7 @@ in the onClose method the pointer should be set to NULL or used to connect to a 
 #define __CC_SOCKETIO_H__
 
 #include <string>
+#include <unordered_map>
 #include "platform/CCPlatformMacros.h"
 #include "base/CCMap.h"
 
@@ -109,7 +110,7 @@ public:
          *
          * @param client the connected SIOClient object.
          */
-        virtual void onConnect(SIOClient* client) { CC_UNUSED_PARAM(client); CCLOG("SIODelegate onConnect fired"); };
+        virtual void onConnect(SIOClient* client) { CCLOG("SIODelegate onConnect fired"); };
         /**
          * This is kept for backwards compatibility, message is now fired as a socket.io event "message"
          *
@@ -118,9 +119,9 @@ public:
          * @param client the connected SIOClient object.
          * @param data the message,it could be json message
          */
-        virtual void onMessage(SIOClient* client, const std::string& data) { CC_UNUSED_PARAM(client); CCLOG("SIODelegate onMessage fired with data: %s", data.c_str()); };
+        virtual void onMessage(SIOClient* client, const std::string& data) { CCLOG("SIODelegate onMessage fired with data: %s", data.c_str()); };
         /**
-         * Pure virtual callback function, this function should be overrided by the subclass.
+         * Pure virtual callback function, this function should be overridden by the subclass.
          *
          * This function would be called when the related SIOClient object disconnect or receive disconnect signal.
          *
@@ -128,7 +129,7 @@ public:
          */
         virtual void onClose(SIOClient* client) = 0;
         /**
-         * Pure virtual callback function, this function should be overrided by the subclass.
+         * Pure virtual callback function, this function should be overridden by the subclass.
          *
          * This function would be called when the related SIOClient object receive error signal or didn't connect the endpoint but do some network operation, eg.,send and emit,etc.
          *
@@ -143,7 +144,7 @@ public:
          * @param eventName the event's name.
          * @param data the event's data information.
          */
-        virtual void fireEventToScript(SIOClient* client, const std::string& eventName, const std::string& data) { CC_UNUSED_PARAM(client); CCLOG("SIODelegate event '%s' fired with data: %s", eventName.c_str(), data.c_str()); };
+        virtual void fireEventToScript(SIOClient* client, const std::string& eventName, const std::string& data) { CCLOG("SIODelegate event '%s' fired with data: %s", eventName.c_str(), data.c_str()); };
     };
 
     /**

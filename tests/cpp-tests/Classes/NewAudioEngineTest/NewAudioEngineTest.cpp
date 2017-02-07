@@ -41,9 +41,11 @@ AudioEngineTests::AudioEngineTests()
     ADD_TEST_CASE(LargeAudioFileTest);
     ADD_TEST_CASE(AudioPerformanceTest);
     ADD_TEST_CASE(AudioSmallFileTest);
+    ADD_TEST_CASE(AudioSmallFile2Test);
     ADD_TEST_CASE(AudioPauseResumeAfterPlay);
     ADD_TEST_CASE(AudioPreloadSameFileMultipleTimes);
     ADD_TEST_CASE(AudioPlayFileInWritablePath);
+    ADD_TEST_CASE(AudioIssue16938Test);
     
     //FIXME: Please keep AudioSwitchStateTest to the last position since this test case doesn't work well on each platforms.
     ADD_TEST_CASE(AudioSwitchStateTest);
@@ -828,6 +830,26 @@ std::string AudioSmallFileTest::subtitle() const
 }
 
 /////////////////////////////////////////////////////////////////////////
+void AudioSmallFile2Test::onEnter()
+{
+    AudioEngineTestDemo::onEnter();
+
+    schedule([](float dt){
+        AudioEngine::play2d("audio/SmallFile2.mp3");
+    }, 0.08f, "smallfile2");
+}
+
+std::string AudioSmallFile2Test::title() const
+{
+    return "Play small mp3 file 2";
+}
+
+std::string AudioSmallFile2Test::subtitle() const
+{
+    return "Should not crash and should not have rasp!";
+}
+
+/////////////////////////////////////////////////////////////////////////
 void AudioPauseResumeAfterPlay::onEnter()
 {
     AudioEngineTestDemo::onEnter();
@@ -851,6 +873,24 @@ std::string AudioPauseResumeAfterPlay::title() const
 std::string AudioPauseResumeAfterPlay::subtitle() const
 {
     return "Should not crash";
+}
+
+/////////////////////////////////////////////////////////////////////////
+void AudioIssue16938Test::onEnter()
+{
+    AudioEngineTestDemo::onEnter();
+
+    AudioEngine::play2d("audio/EntireFramesTest.mp3");
+}
+
+std::string AudioIssue16938Test::title() const
+{
+    return "Issue 16938 Test";
+}
+
+std::string AudioIssue16938Test::subtitle() const
+{
+    return "Should heard the entire audio frames";
 }
 
 /////////////////////////////////////////////////////////////////////////

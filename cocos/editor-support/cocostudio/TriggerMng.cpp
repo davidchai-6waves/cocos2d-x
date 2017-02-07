@@ -23,7 +23,6 @@ THE SOFTWARE.
 ****************************************************************************/
 
 #include "editor-support/cocostudio/TriggerMng.h"
-#include "json/filestream.h"
 #include "json/prettywriter.h"
 #include "json/stringbuffer.h"
 #include "base/CCDirector.h"
@@ -517,7 +516,7 @@ ArmatureMovementDispatcher::~ArmatureMovementDispatcher(void)
 	  _mapEventAnimation->insert(std::make_pair(pTarget, mecf));
   }
 
-  void ArmatureMovementDispatcher::removeAnnimationEventCallBack(Ref *pTarget, SEL_MovementEventCallFunc mecf)
+  void ArmatureMovementDispatcher::removeAnnimationEventCallBack(Ref *pTarget, SEL_MovementEventCallFunc /*mecf*/)
   {
 	  _mapEventAnimation->erase(pTarget);
   }

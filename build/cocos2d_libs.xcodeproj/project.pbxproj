@@ -906,6 +906,12 @@
 		1A1645B1191B726C008C7C7F /* ConvertUTF.c in Sources */ = {isa = PBXBuildFile; fileRef = 1A1645AE191B726C008C7C7F /* ConvertUTF.c */; };
 		1A1645B2191B726C008C7C7F /* ConvertUTFWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A1645AF191B726C008C7C7F /* ConvertUTFWrapper.cpp */; };
 		1A1645B3191B726C008C7C7F /* ConvertUTFWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A1645AF191B726C008C7C7F /* ConvertUTFWrapper.cpp */; };
+		1A41ABC21DF00CEC00B5584C /* AudioDecoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1A41ABC11DF00CEC00B5584C /* AudioDecoder.mm */; };
+		1A41ABC31DF00CEC00B5584C /* AudioDecoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1A41ABC11DF00CEC00B5584C /* AudioDecoder.mm */; };
+		1A41ABC41DF00CEC00B5584C /* AudioDecoder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1A41ABC11DF00CEC00B5584C /* AudioDecoder.mm */; };
+		1A41ABC61DF00D1500B5584C /* AudioDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A41ABC51DF00D1500B5584C /* AudioDecoder.h */; };
+		1A41ABC71DF00D1500B5584C /* AudioDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A41ABC51DF00D1500B5584C /* AudioDecoder.h */; };
+		1A41ABC81DF00D1500B5584C /* AudioDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A41ABC51DF00D1500B5584C /* AudioDecoder.h */; };
 		1A570061180BC5A10088DEC7 /* CCAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A570047180BC5A10088DEC7 /* CCAction.cpp */; };
 		1A570062180BC5A10088DEC7 /* CCAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A570047180BC5A10088DEC7 /* CCAction.cpp */; };
 		1A570063180BC5A10088DEC7 /* CCAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A570048180BC5A10088DEC7 /* CCAction.h */; };
@@ -1165,6 +1171,9 @@
 		1A5703BB180BD2800088DEC7 /* libwebp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A5703BA180BD2800088DEC7 /* libwebp.a */; };
 		1A57052B180BD31F0088DEC7 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A57052A180BD31F0088DEC7 /* libfreetype.a */; };
 		1A57052E180BD3280088DEC7 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A57052D180BD3280088DEC7 /* libfreetype.a */; };
+		1A5FB7C41DF012D900C918C1 /* AudioMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5FB7C31DF012D900C918C1 /* AudioMacros.h */; };
+		1A5FB7C51DF012D900C918C1 /* AudioMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5FB7C31DF012D900C918C1 /* AudioMacros.h */; };
+		1A5FB7C61DF012D900C918C1 /* AudioMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A5FB7C31DF012D900C918C1 /* AudioMacros.h */; };
 		1A9DCA27180E6955007A3AD4 /* CCGLBufferedNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A9DCA02180E6955007A3AD4 /* CCGLBufferedNode.cpp */; };
 		1A9DCA28180E6955007A3AD4 /* CCGLBufferedNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A9DCA02180E6955007A3AD4 /* CCGLBufferedNode.cpp */; };
 		1A9DCA29180E6955007A3AD4 /* CCGLBufferedNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A9DCA03180E6955007A3AD4 /* CCGLBufferedNode.h */; };
@@ -1211,11 +1220,6 @@
 		292DB16019B461CA00A80320 /* ExtensionDeprecated.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 292DB15D19B461CA00A80320 /* ExtensionDeprecated.cpp */; };
 		292DB16119B461CA00A80320 /* ExtensionDeprecated.h in Headers */ = {isa = PBXBuildFile; fileRef = 292DB15E19B461CA00A80320 /* ExtensionDeprecated.h */; };
 		292DB16219B461CA00A80320 /* ExtensionDeprecated.h in Headers */ = {isa = PBXBuildFile; fileRef = 292DB15E19B461CA00A80320 /* ExtensionDeprecated.h */; };
-		292F1A5D1A5151CE00E479F8 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 292F1A5B1A5151CE00E479F8 /* libcrypto.a */; };
-		292F1A5E1A5151CE00E479F8 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 292F1A5C1A5151CE00E479F8 /* libssl.a */; };
-		292F1A631A52447100E479F8 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 292F1A601A52447100E479F8 /* libcrypto.a */; };
-		292F1A641A52447100E479F8 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 292F1A611A52447100E479F8 /* libcurl.a */; };
-		292F1A6B1A5250F700E479F8 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 292F1A6A1A5250F700E479F8 /* libssl.a */; };
 		29394CF019B01DBA00D2DE1A /* UIWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 29394CEC19B01DBA00D2DE1A /* UIWebView.h */; };
 		29394CF119B01DBA00D2DE1A /* UIWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = 29394CEC19B01DBA00D2DE1A /* UIWebView.h */; };
 		29394CF219B01DBA00D2DE1A /* UIWebView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 29394CED19B01DBA00D2DE1A /* UIWebView.mm */; };
@@ -1375,6 +1379,10 @@
 		43015DC01B60DF4000E75161 /* CCComExtensionData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43015DBD1B60DF4000E75161 /* CCComExtensionData.cpp */; };
 		43015DC11B60DF4000E75161 /* CCComExtensionData.h in Headers */ = {isa = PBXBuildFile; fileRef = 43015DBE1B60DF4000E75161 /* CCComExtensionData.h */; };
 		43015DC21B60DF4000E75161 /* CCComExtensionData.h in Headers */ = {isa = PBXBuildFile; fileRef = 43015DBE1B60DF4000E75161 /* CCComExtensionData.h */; };
+		46270FA41E1CC6A200AAA098 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46270FA21E1CC6A100AAA098 /* libcrypto.a */; };
+		46270FA51E1CC6A200AAA098 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46270FA31E1CC6A100AAA098 /* libssl.a */; };
+		46270FA81E1CC84500AAA098 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46270FA61E1CC84500AAA098 /* libcrypto.a */; };
+		46270FA91E1CC84500AAA098 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46270FA71E1CC84500AAA098 /* libssl.a */; };
 		464AD6E5197EBB1400E502D8 /* pvr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 464AD6E3197EBB1400E502D8 /* pvr.cpp */; };
 		464AD6E6197EBB1400E502D8 /* pvr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 464AD6E3197EBB1400E502D8 /* pvr.cpp */; };
 		464AD6E7197EBB1400E502D8 /* pvr.h in Headers */ = {isa = PBXBuildFile; fileRef = 464AD6E4197EBB1400E502D8 /* pvr.h */; };
@@ -1764,7 +1772,6 @@
 		50693C611B6BF2AE005C5820 /* CCDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = 50693C5D1B6BF2AE005C5820 /* CCDownloader.h */; };
 		5070031B1B69735200E83DDD /* HttpClient-android.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 507003161B69735200E83DDD /* HttpClient-android.cpp */; };
 		5070031D1B69735200E83DDD /* HttpClient-winrt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 507003171B69735200E83DDD /* HttpClient-winrt.cpp */; };
-		5070031F1B69735200E83DDD /* HttpClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 507003181B69735200E83DDD /* HttpClient.cpp */; };
 		507003211B69735300E83DDD /* HttpConnection-winrt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 507003191B69735200E83DDD /* HttpConnection-winrt.cpp */; };
 		507003221B69735300E83DDD /* HttpConnection-winrt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 507003191B69735200E83DDD /* HttpConnection-winrt.cpp */; };
 		507003231B69735300E83DDD /* HttpConnection-winrt.h in Headers */ = {isa = PBXBuildFile; fileRef = 5070031A1B69735200E83DDD /* HttpConnection-winrt.h */; };
@@ -5855,6 +5862,8 @@
 		1A087AE71860400400196EF5 /* edtaa3func.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = edtaa3func.h; sourceTree = "<group>"; };
 		1A1645AE191B726C008C7C7F /* ConvertUTF.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ConvertUTF.c; sourceTree = "<group>"; };
 		1A1645AF191B726C008C7C7F /* ConvertUTFWrapper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConvertUTFWrapper.cpp; sourceTree = "<group>"; };
+		1A41ABC11DF00CEC00B5584C /* AudioDecoder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioDecoder.mm; sourceTree = "<group>"; };
+		1A41ABC51DF00D1500B5584C /* AudioDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioDecoder.h; sourceTree = "<group>"; };
 		1A570047180BC5A10088DEC7 /* CCAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCAction.cpp; sourceTree = "<group>"; };
 		1A570048180BC5A10088DEC7 /* CCAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAction.h; sourceTree = "<group>"; };
 		1A570049180BC5A10088DEC7 /* CCActionCamera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCActionCamera.cpp; sourceTree = "<group>"; };
@@ -5991,6 +6000,7 @@
 		1A57052A180BD31F0088DEC7 /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libfreetype.a; sourceTree = "<group>"; };
 		1A57052D180BD3280088DEC7 /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libfreetype.a; sourceTree = "<group>"; };
 		1A57FFF7180BC5160088DEC7 /* CHANGELOG */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; lineEnding = 0; name = CHANGELOG; path = ../CHANGELOG; sourceTree = "<group>"; };
+		1A5FB7C31DF012D900C918C1 /* AudioMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioMacros.h; sourceTree = "<group>"; };
 		1A8C5948180E930E00EF57C3 /* CCActionFrame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCActionFrame.cpp; sourceTree = "<group>"; };
 		1A8C5949180E930E00EF57C3 /* CCActionFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCActionFrame.h; sourceTree = "<group>"; };
 		1A8C594A180E930E00EF57C3 /* CCActionFrameEasing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCActionFrameEasing.cpp; sourceTree = "<group>"; };
@@ -6312,6 +6322,10 @@
 		3EACC99F19F5014D00EB3C5E /* CCLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCLight.h; sourceTree = "<group>"; };
 		43015DBD1B60DF4000E75161 /* CCComExtensionData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCComExtensionData.cpp; sourceTree = "<group>"; };
 		43015DBE1B60DF4000E75161 /* CCComExtensionData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCComExtensionData.h; sourceTree = "<group>"; };
+		46270FA21E1CC6A100AAA098 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../external/openssl/prebuilt/mac/libcrypto.a; sourceTree = "<group>"; };
+		46270FA31E1CC6A100AAA098 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = ../external/openssl/prebuilt/mac/libssl.a; sourceTree = "<group>"; };
+		46270FA61E1CC84500AAA098 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../external/openssl/prebuilt/ios/libcrypto.a; sourceTree = "<group>"; };
+		46270FA71E1CC84500AAA098 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = ../external/openssl/prebuilt/ios/libssl.a; sourceTree = "<group>"; };
 		464AD6E3197EBB1400E502D8 /* pvr.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = pvr.cpp; path = ../base/pvr.cpp; sourceTree = "<group>"; };
 		464AD6E4197EBB1400E502D8 /* pvr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pvr.h; path = ../base/pvr.h; sourceTree = "<group>"; };
 		46A15FCC1807A544005B8026 /* AUTHORS */ = {isa = PBXFileReference; lastKnownFileType = text; name = AUTHORS; path = ../AUTHORS; sourceTree = "<group>"; };
@@ -7787,16 +7801,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46270FA41E1CC6A200AAA098 /* libcrypto.a in Frameworks */,
+				46270FA51E1CC6A200AAA098 /* libssl.a in Frameworks */,
 				29031E0719BFE8D400EFA1DF /* libchipmunk.a in Frameworks */,
 				15AE1C1A19AAE3C800C27E9E /* libwebsockets.a in Frameworks */,
-				292F1A6B1A5250F700E479F8 /* libssl.a in Frameworks */,
-				292F1A631A52447100E479F8 /* libcrypto.a in Frameworks */,
 				B21770471977ED34009EE11B /* QuartzCore.framework in Frameworks */,
 				B21770451977ED14009EE11B /* Cocoa.framework in Frameworks */,
 				B21770421977ECF8009EE11B /* ApplicationServices.framework in Frameworks */,
 				B21770401977ECE6009EE11B /* OpenGL.framework in Frameworks */,
 				B217703C1977ECB4009EE11B /* IOKit.framework in Frameworks */,
-				292F1A641A52447100E479F8 /* libcurl.a in Frameworks */,
 				1A570347180BD0850088DEC7 /* libglfw3.a in Frameworks */,
 				1A570361180BD1080088DEC7 /* libpng.a in Frameworks */,
 				1A57037B180BD1C90088DEC7 /* libjpeg.a in Frameworks */,
@@ -7827,13 +7840,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46270FA81E1CC84500AAA098 /* libcrypto.a in Frameworks */,
+				46270FA91E1CC84500AAA098 /* libssl.a in Frameworks */,
 				15AE1C1919AAE30900C27E9E /* libwebsockets.a in Frameworks */,
-				292F1A5E1A5151CE00E479F8 /* libssl.a in Frameworks */,
 				A07A4CAF1783777C0073F6A7 /* Foundation.framework in Frameworks */,
 				1A570364180BD1120088DEC7 /* libpng.a in Frameworks */,
 				1A570378180BD1B40088DEC7 /* libjpeg.a in Frameworks */,
 				1A5703A4180BD2350088DEC7 /* libtiff.a in Frameworks */,
-				292F1A5D1A5151CE00E479F8 /* libcrypto.a in Frameworks */,
 				29031E0919BFE8DE00EFA1DF /* libchipmunk.a in Frameworks */,
 				1A5703BB180BD2800088DEC7 /* libwebp.a in Frameworks */,
 				1A57052E180BD3280088DEC7 /* libfreetype.a in Frameworks */,
@@ -7919,6 +7932,10 @@
 		1551A341158F2AB200E66CFE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				46270FA61E1CC84500AAA098 /* libcrypto.a */,
+				46270FA71E1CC84500AAA098 /* libssl.a */,
+				46270FA21E1CC6A100AAA098 /* libcrypto.a */,
+				46270FA31E1CC6A100AAA098 /* libssl.a */,
 				29DC5A1C1CFFE5C000CF2930 /* CoreText.framework */,
 				2905E9CC1ACD3D8C00092DD2 /* libz.a */,
 				292F1A661A524F2700E479F8 /* libssl.dylib */,
@@ -10027,6 +10044,9 @@
 				50CB247219D9C5A100687767 /* AudioEngine-inl.mm */,
 				50CB247319D9C5A100687767 /* AudioPlayer.h */,
 				50CB247419D9C5A100687767 /* AudioPlayer.mm */,
+				1A41ABC11DF00CEC00B5584C /* AudioDecoder.mm */,
+				1A41ABC51DF00D1500B5584C /* AudioDecoder.h */,
+				1A5FB7C31DF012D900C918C1 /* AudioMacros.h */,
 			);
 			path = apple;
 			sourceTree = "<group>";
@@ -11528,6 +11548,7 @@
 				B6CAB3E51AF9AA1A00B9B856 /* btActionInterface.h in Headers */,
 				5034CA3B191D591100CE6051 /* ccShader_PositionColor.vert in Headers */,
 				B665E3101AA80A6500DDB1C5 /* CCPUObserver.h in Headers */,
+				1A5FB7C41DF012D900C918C1 /* AudioMacros.h in Headers */,
 				B6CAB2071AF9AA1A00B9B856 /* btOverlappingPairCache.h in Headers */,
 				1A570077180BC5A10088DEC7 /* CCActionGrid3D.h in Headers */,
 				1A57007B180BC5A10088DEC7 /* CCActionInstant.h in Headers */,
@@ -11931,6 +11952,7 @@
 				2962D6031C61F02E004821A3 /* CCUITextFieldFormatter.h in Headers */,
 				C503066E1B60B583001E6D43 /* CCSkinNode.h in Headers */,
 				5027253A190BF1B900AAF4ED /* cocos2d.h in Headers */,
+				1A41ABC61DF00D1500B5584C /* AudioDecoder.h in Headers */,
 				B665E3041AA80A6500DDB1C5 /* CCPUMeshSurfaceEmitter.h in Headers */,
 				15AE1B5A19AADA9900C27E9E /* UIText.h in Headers */,
 				B665E21C1AA80A6500DDB1C5 /* CCPUBehaviour.h in Headers */,
@@ -12583,6 +12605,7 @@
 				507B3DB11C31BDD30067B53E /* fastlz.h in Headers */,
 				507B3DB21C31BDD30067B53E /* CCPUVertexEmitter.h in Headers */,
 				507B3DB31C31BDD30067B53E /* CCPUCollisionAvoidanceAffector.h in Headers */,
+				1A5FB7C61DF012D900C918C1 /* AudioMacros.h in Headers */,
 				5020A1C71D49912500E80C72 /* PathAttachment.h in Headers */,
 				507B3DB41C31BDD30067B53E /* btQuantization.h in Headers */,
 				507B3DB51C31BDD30067B53E /* CCVector.h in Headers */,
@@ -12986,6 +13009,7 @@
 				507B3F2E1C31BDD30067B53E /* b2EdgeAndCircleContact.h in Headers */,
 				507B3F2F1C31BDD30067B53E /* UIListView.h in Headers */,
 				50864CA21C7BC1B000B3BAB1 /* cpBB.h in Headers */,
+				1A41ABC81DF00D1500B5584C /* AudioDecoder.h in Headers */,
 				507B3F301C31BDD30067B53E /* TriggerMng.h in Headers */,
 				507B3F311C31BDD30067B53E /* ccShader_PositionTextureA8Color.vert in Headers */,
 				507B3F321C31BDD30067B53E /* btSphereTriangleCollisionAlgorithm.h in Headers */,
@@ -14322,6 +14346,7 @@
 				50ABC0081926664800A911A9 /* CCApplicationProtocol.h in Headers */,
 				1ABA68B11888D700007D1BB4 /* CCFontCharMap.h in Headers */,
 				15AE1ACF19AAD40300C27E9E /* b2PulleyJoint.h in Headers */,
+				1A41ABC71DF00D1500B5584C /* AudioDecoder.h in Headers */,
 				D0FD03601A3B51AA00825BB5 /* CCAllocatorStrategyPool.h in Headers */,
 				5020A18A1D49912500E80C72 /* BoneData.h in Headers */,
 				15AE198019AAD35700C27E9E /* CCTimeLine.h in Headers */,
@@ -14499,6 +14524,7 @@
 				B665E3391AA80A6500DDB1C5 /* CCPUOnEmissionObserverTranslator.h in Headers */,
 				B665E4151AA80A6600DDB1C5 /* CCPUTextureAnimator.h in Headers */,
 				50ABC01C1926664800A911A9 /* CCSAXParser.h in Headers */,
+				1A5FB7C51DF012D900C918C1 /* AudioMacros.h in Headers */,
 				B6CAB4EA1AF9AA1A00B9B856 /* TrbDynBody.h in Headers */,
 				503DD8F11926736A00CD74DD /* OpenGL_Internal-ios.h in Headers */,
 				B6CAB3EC1AF9AA1A00B9B856 /* btDynamicsWorld.h in Headers */,
@@ -14801,7 +14827,6 @@
 				B665E3A61AA80A6500DDB1C5 /* CCPURandomiser.cpp in Sources */,
 				B665E3CA1AA80A6600DDB1C5 /* CCPUScaleVelocityAffectorTranslator.cpp in Sources */,
 				1A57008D180BC5A10088DEC7 /* CCActionTiledGrid.cpp in Sources */,
-				5070031F1B69735200E83DDD /* HttpClient.cpp in Sources */,
 				B665E26E1AA80A6500DDB1C5 /* CCPUDoFreezeEventHandlerTranslator.cpp in Sources */,
 				B6DD2FF11B04825B00E47F5F /* DetourTileCacheBuilder.cpp in Sources */,
 				B665E1FE1AA80A6500DDB1C5 /* CCPUAlignAffector.cpp in Sources */,
@@ -14974,6 +14999,7 @@
 				C5F516121C8216660013B695 /* UITabControl.cpp in Sources */,
 				B665E27E1AA80A6500DDB1C5 /* CCPUDoScaleEventHandlerTranslator.cpp in Sources */,
 				B63990CC1A490AFE00B07923 /* CCAsyncTaskPool.cpp in Sources */,
+				1A41ABC21DF00CEC00B5584C /* AudioDecoder.mm in Sources */,
 				182C5CE51A9D725400C30D34 /* UserCameraReader.cpp in Sources */,
 				B665E29A1AA80A6500DDB1C5 /* CCPUEmitterTranslator.cpp in Sources */,
 				1A5701EA180BCB8C0088DEC7 /* CCTransitionPageTurn.cpp in Sources */,
@@ -15652,6 +15678,7 @@
 				507B3A6A1C31BDD30067B53E /* b2Joint.cpp in Sources */,
 				507B3A6B1C31BDD30067B53E /* CCEvent.cpp in Sources */,
 				507B3A6C1C31BDD30067B53E /* btGeneric6DofConstraint.cpp in Sources */,
+				1A41ABC41DF00CEC00B5584C /* AudioDecoder.mm in Sources */,
 				507B3A6D1C31BDD30067B53E /* shapes.cc in Sources */,
 				507B3A6E1C31BDD30067B53E /* btTriangleIndexVertexArray.cpp in Sources */,
 				507B3A6F1C31BDD30067B53E /* CCScheduler.cpp in Sources */,
@@ -16407,6 +16434,7 @@
 				B6CAB3B01AF9AA1A00B9B856 /* btFixedConstraint.cpp in Sources */,
 				15AE186119AAD31200C27E9E /* SimpleAudioEngine_objc.m in Sources */,
 				15AE182519AAD2F700C27E9E /* CCMesh.cpp in Sources */,
+				1A41ABC31DF00CEC00B5584C /* AudioDecoder.mm in Sources */,
 				B665E4071AA80A6600DDB1C5 /* CCPUSphereSurfaceEmitter.cpp in Sources */,
 				503DD8EE1926736A00CD74DD /* CCImage-ios.mm in Sources */,
 				B6CAB2941AF9AA1A00B9B856 /* btCompoundShape.cpp in Sources */,
@@ -17314,10 +17342,11 @@
 					"\"$(SRCROOT)/../external/chipmunk/prebuilt/mac\"",
 					"\"$(SRCROOT)/../external/curl/prebuilt/mac\"",
 					"\"$(SRCROOT)/../external/zlib/prebuilt/mac\"",
+					"$(SRCROOT)/../external/openssl/prebuilt/mac",
 				);
 				MACH_O_TYPE = staticlib;
 				OTHER_LDFLAGS = "-llibsql3";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/png/include/mac $(SRCROOT)/../external/tiff/include/mac $(SRCROOT)/../external/webp/include/mac $(SRCROOT)/../external/jpeg/include/mac $(SRCROOT)/../external/freetype2/include/mac $(SRCROOT)/../external/glfw3/include/mac $(SRCROOT)/../external/websockets/include/mac $(SRCROOT)/../external/curl/include/mac $(SRCROOT)/../external/freetype2/include/mac/freetype2";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/png/include/mac $(SRCROOT)/../external/tiff/include/mac $(SRCROOT)/../external/webp/include/mac $(SRCROOT)/../external/jpeg/include/mac $(SRCROOT)/../external/freetype2/include/mac $(SRCROOT)/../external/glfw3/include/mac $(SRCROOT)/../external/websockets/include/mac $(SRCROOT)/../external/curl/include/mac $(SRCROOT)/../external/freetype2/include/mac/freetype2 $(SRCROOT)/../external/openssl/include/mac";
 			};
 			name = Debug;
 		};
@@ -17351,10 +17380,11 @@
 					"\"$(SRCROOT)/../external/chipmunk/prebuilt/mac\"",
 					"\"$(SRCROOT)/../external/curl/prebuilt/mac\"",
 					"\"$(SRCROOT)/../external/zlib/prebuilt/mac\"",
+					"$(SRCROOT)/../external/openssl/prebuilt/mac",
 				);
 				MACH_O_TYPE = staticlib;
 				OTHER_LDFLAGS = "-llibsql3";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/png/include/mac $(SRCROOT)/../external/tiff/include/mac $(SRCROOT)/../external/webp/include/mac $(SRCROOT)/../external/jpeg/include/mac $(SRCROOT)/../external/freetype2/include/mac $(SRCROOT)/../external/glfw3/include/mac $(SRCROOT)/../external/websockets/include/mac $(SRCROOT)/../external/curl/include/mac $(SRCROOT)/../external/freetype2/include/mac/freetype2";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/png/include/mac $(SRCROOT)/../external/tiff/include/mac $(SRCROOT)/../external/webp/include/mac $(SRCROOT)/../external/jpeg/include/mac $(SRCROOT)/../external/freetype2/include/mac $(SRCROOT)/../external/glfw3/include/mac $(SRCROOT)/../external/websockets/include/mac $(SRCROOT)/../external/curl/include/mac $(SRCROOT)/../external/freetype2/include/mac/freetype2 $(SRCROOT)/../external/openssl/include/mac";
 			};
 			name = Release;
 		};
@@ -17385,7 +17415,7 @@
 				OTHER_LDFLAGS = "-llibsql3";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos9.1;
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/freetype2/include/ios $(SRCROOT)/../external/curl/include/ios $(SRCROOT)/../external/webp/include/ios $(SRCROOT)/../external/tiff/include/ios $(SRCROOT)/../external/jpeg/include/ios $(SRCROOT)/../external/png/include/ios $(SRCROOT)/../external/websockets/include/ios $(SRCROOT)/../external/freetype2/include/ios/freetype2";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/freetype2/include/ios $(SRCROOT)/../external/curl/include/ios $(SRCROOT)/../external/webp/include/ios $(SRCROOT)/../external/tiff/include/ios $(SRCROOT)/../external/jpeg/include/ios $(SRCROOT)/../external/png/include/ios $(SRCROOT)/../external/websockets/include/ios $(SRCROOT)/../external/freetype2/include/ios/freetype2 $(SRCROOT)/../external/openssl/include/ios";
 			};
 			name = Debug;
 		};
@@ -17417,7 +17447,7 @@
 				OTHER_LDFLAGS = "-llibsql3";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos9.1;
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/freetype2/include/ios $(SRCROOT)/../external/curl/include/ios $(SRCROOT)/../external/webp/include/ios $(SRCROOT)/../external/tiff/include/ios $(SRCROOT)/../external/jpeg/include/ios $(SRCROOT)/../external/png/include/ios $(SRCROOT)/../external/websockets/include/ios $(SRCROOT)/../external/freetype2/include/ios/freetype2";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/freetype2/include/ios $(SRCROOT)/../external/curl/include/ios $(SRCROOT)/../external/webp/include/ios $(SRCROOT)/../external/tiff/include/ios $(SRCROOT)/../external/jpeg/include/ios $(SRCROOT)/../external/png/include/ios $(SRCROOT)/../external/websockets/include/ios $(SRCROOT)/../external/freetype2/include/ios/freetype2 $(SRCROOT)/../external/openssl/include/ios";
 			};
 			name = Release;
 		};
@@ -17445,11 +17475,12 @@
 					"\"$(SRCROOT)/../external/curl/prebuilt/ios\"",
 					"\"$(SRCROOT)/../external/websockets/prebuilt/ios\"",
 					"\"$(SRCROOT)/../external/chipmunk/prebuilt/ios\"",
+					"\"$(SRCROOT)/../external/openssl/prebuilt/ios\"",
 				);
 				OTHER_LDFLAGS = "-llibsql3";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/freetype2/include/ios $(SRCROOT)/../external/curl/include/ios $(SRCROOT)/../external/webp/include/ios $(SRCROOT)/../external/tiff/include/ios $(SRCROOT)/../external/jpeg/include/ios $(SRCROOT)/../external/png/include/ios $(SRCROOT)/../external/websockets/include/ios $(SRCROOT)/../external/freetype2/include/ios/freetype2";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/freetype2/include/ios $(SRCROOT)/../external/curl/include/ios $(SRCROOT)/../external/webp/include/ios $(SRCROOT)/../external/tiff/include/ios $(SRCROOT)/../external/jpeg/include/ios $(SRCROOT)/../external/png/include/ios $(SRCROOT)/../external/websockets/include/ios $(SRCROOT)/../external/freetype2/include/ios/freetype2 $(SRCROOT)/../external/openssl/include/ios";
 				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Debug;
@@ -17479,11 +17510,12 @@
 					"\"$(SRCROOT)/../external/curl/prebuilt/ios\"",
 					"\"$(SRCROOT)/../external/websockets/prebuilt/ios\"",
 					"\"$(SRCROOT)/../external/chipmunk/prebuilt/ios\"",
+					"\"$(SRCROOT)/../external/openssl/prebuilt/ios\"",
 				);
 				OTHER_LDFLAGS = "-llibsql3";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/freetype2/include/ios $(SRCROOT)/../external/curl/include/ios $(SRCROOT)/../external/webp/include/ios $(SRCROOT)/../external/tiff/include/ios $(SRCROOT)/../external/jpeg/include/ios $(SRCROOT)/../external/png/include/ios $(SRCROOT)/../external/websockets/include/ios $(SRCROOT)/../external/freetype2/include/ios/freetype2";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/freetype2/include/ios $(SRCROOT)/../external/curl/include/ios $(SRCROOT)/../external/webp/include/ios $(SRCROOT)/../external/tiff/include/ios $(SRCROOT)/../external/jpeg/include/ios $(SRCROOT)/../external/png/include/ios $(SRCROOT)/../external/websockets/include/ios $(SRCROOT)/../external/freetype2/include/ios/freetype2 $(SRCROOT)/../external/openssl/include/ios";
 				VALID_ARCHS = "arm64 armv7";
 			};
 			name = Release;

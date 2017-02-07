@@ -83,7 +83,7 @@ AssetsManagerEx::AssetsManagerEx(const std::string& manifestUrl, const std::stri
 //    _downloader->setConnectionTimeout(DEFAULT_CONNECTION_TIMEOUT);
     _downloader->onTaskError = bind(&AssetsManagerEx::onError, this, placeholders::_1, placeholders::_2, placeholders::_3, placeholders::_4);
     _downloader->onTaskProgress = [this](const network::DownloadTask& task,
-                                         int64_t bytesReceived,
+                                         int64_t /*bytesReceived*/,
                                          int64_t totalBytesReceived,
                                          int64_t totalBytesExpected)
     {
@@ -178,7 +178,7 @@ void AssetsManagerEx::prepareLocalManifest()
     _localManifest->prependSearchPaths();
 }
 
-void AssetsManagerEx::loadLocalManifest(const std::string& manifestUrl)
+void AssetsManagerEx::loadLocalManifest(const std::string& /*manifestUrl*/)
 {
     Manifest *cachedManifest = nullptr;
     // Find the cached manifest file
@@ -347,6 +347,16 @@ bool AssetsManagerEx::decompress(const std::string &zip)
         }
         else
         {
+            // Create all directories in advance to avoid issue
+            std::string dir = basename(fullPath);
+            if (!_fileUtils->isDirectoryExist(dir)) {
+                if (!_fileUtils->createDirectory(dir)) {
+                    // Failed to create directory
+                    CCLOG("AssetsManagerEx : can not create directory %s\n", fullPath.c_str());
+                    unzClose(zipfile);
+                    return false;
+                }
+            }
             // Entry is a file, so extract it.
             // Open current file.
             if (unzOpenCurrentFile(zipfile) != UNZ_OK)
@@ -360,7 +370,7 @@ bool AssetsManagerEx::decompress(const std::string &zip)
             FILE *out = fopen(FileUtils::getInstance()->getSuitableFOpen(fullPath).c_str(), "wb");
             if (!out)
             {
-                CCLOG("AssetsManagerEx : can not create decompress destination file %s\n", fullPath.c_str());
+                CCLOG("AssetsManagerEx : can not create decompress destination file %s (errno: %d)\n", fullPath.c_str(), errno);
                 unzCloseCurrentFile(zipfile);
                 unzClose(zipfile);
                 return false;
@@ -639,7 +649,7 @@ void AssetsManagerEx::updateSucceed()
 {
     // Every thing is correctly downloaded, do the following
     // 1. rename temporary manifest to valid manifest
-    _fileUtils->renameFile(_storagePath, TEMP_MANIFEST_FILENAME, MANIFEST_FILENAME);
+    _fileUtils->renameFile(_storagePath, std::string(TEMP_MANIFEST_FILENAME), std::string(MANIFEST_FILENAME));
     // 2. swap the localManifest
     if (_localManifest != nullptr)
         _localManifest->release();
@@ -871,7 +881,7 @@ void AssetsManagerEx::onError(const network::DownloadTask& task,
     }
 }
 
-void AssetsManagerEx::onProgress(double total, double downloaded, const std::string &url, const std::string &customId)
+void AssetsManagerEx::onProgress(double total, double downloaded, const std::string& /*url*/, const std::string &customId)
 {
     if (customId == VERSION_ID || customId == MANIFEST_ID)
     {
@@ -923,7 +933,7 @@ void AssetsManagerEx::onProgress(double total, double downloaded, const std::str
     }
 }
 
-void AssetsManagerEx::onSuccess(const std::string &srcUrl, const std::string &storagePath, const std::string &customId)
+void AssetsManagerEx::onSuccess(const std::string &/*srcUrl*/, const std::string &storagePath, const std::string &customId)
 {
     if (customId == VERSION_ID)
     {

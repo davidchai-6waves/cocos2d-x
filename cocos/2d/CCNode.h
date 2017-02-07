@@ -1058,7 +1058,7 @@ public:
      * Since v2.0, each rendering node must set its shader program.
      * It should be set in initialize phase.
      @code
-     node->setGLrProgram(GLProgramCache::getInstance()->getProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR));
+     node->setGLProgram(GLProgramCache::getInstance()->getProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE_COLOR));
      @endcode
      *
      * @param glprogram The shader program.
@@ -1773,12 +1773,12 @@ public:
      *  If you want the opacity affect the color property, then set to true.
      * @param value A boolean value.
      */
-    virtual void setOpacityModifyRGB(bool value) {CC_UNUSED_PARAM(value);}
+    virtual void setOpacityModifyRGB(bool value);
     /**
      * If node opacity will modify the RGB color value, then you should override this method and return true.
      * @return A boolean value, true indicates that opacity will modify color; false otherwise.
      */
-    virtual bool isOpacityModifyRGB() const { return false; };
+    virtual bool isOpacityModifyRGB() const;
 
     /**
      * Set the callback of event onEnter.

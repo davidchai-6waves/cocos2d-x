@@ -131,8 +131,6 @@ public:
 
     void startElement(void *ctx, const char *name, const char **atts)
     {
-        CC_UNUSED_PARAM(ctx);
-        CC_UNUSED_PARAM(atts);
         const std::string sName(name);
         if( sName == "dict" )
         {
@@ -222,7 +220,6 @@ public:
 
     void endElement(void *ctx, const char *name)
     {
-        CC_UNUSED_PARAM(ctx);
         SAXState curState = _stateStack.empty() ? SAX_DICT : _stateStack.top();
         const std::string sName((char*)name);
         if( sName == "dict" )
@@ -294,7 +291,6 @@ public:
 
     void textHandler(void *ctx, const char *ch, size_t len) override
     {
-        CC_UNUSED_PARAM(ctx);
         if (_state == SAX_NONE)
         {
             return;
@@ -530,10 +526,10 @@ static tinyxml2::XMLElement* generateElementForArray(const ValueVector& array, t
 #else
 
 /* The subclass FileUtilsApple should override these two method. */
-ValueMap FileUtils::getValueMapFromFile(const std::string& filename) {return ValueMap();}
-ValueMap FileUtils::getValueMapFromData(const char* filedata, int filesize) {return ValueMap();}
-ValueVector FileUtils::getValueVectorFromFile(const std::string& filename) {return ValueVector();}
-bool FileUtils::writeToFile(const ValueMap& dict, const std::string &fullPath) {return false;}
+ValueMap FileUtils::getValueMapFromFile(const std::string& /*filename*/) {return ValueMap();}
+ValueMap FileUtils::getValueMapFromData(const char* /*filedata*/, int /*filesize*/) {return ValueMap();}
+ValueVector FileUtils::getValueVectorFromFile(const std::string& /*filename*/) {return ValueVector();}
+bool FileUtils::writeToFile(const ValueMap& /*dict*/, const std::string &/*fullPath*/) {return false;}
 
 #endif /* (CC_TARGET_PLATFORM != CC_PLATFORM_IOS) && (CC_TARGET_PLATFORM != CC_PLATFORM_MAC) */
 
@@ -573,6 +569,13 @@ bool FileUtils::writeStringToFile(const std::string& dataStr, const std::string&
     return rv;
 }
 
+void FileUtils::writeStringToFile(std::string dataStr, const std::string& fullPath, std::function<void(bool)> callback)
+{
+    performOperationOffthread([fullPath](const std::string& dataStrIn) -> bool {
+        return FileUtils::getInstance()->writeStringToFile(dataStrIn, fullPath);
+    }, std::move(callback),std::move(dataStr));
+}
+
 bool FileUtils::writeDataToFile(const Data& data, const std::string& fullPath)
 {
     size_t size = 0;
@@ -598,6 +601,13 @@ bool FileUtils::writeDataToFile(const Data& data, const std::string& fullPath)
     return false;
 }
 
+void FileUtils::writeDataToFile(Data data, const std::string& fullPath, std::function<void(bool)> callback)
+{
+    performOperationOffthread([fullPath](const Data& dataIn) -> bool {
+        return FileUtils::getInstance()->writeDataToFile(dataIn, fullPath);
+    }, std::move(callback), std::move(data));
+}
+
 bool FileUtils::init()
 {
     _searchPathArray.push_back(_defaultResRootPath);
@@ -617,6 +627,16 @@ std::string FileUtils::getStringFromFile(const std::string& filename)
     return s;
 }
 
+void FileUtils::getStringFromFile(const std::string &path, std::function<void (std::string)> callback)
+{
+    // Get the full path on the main thread, to avoid the issue that FileUtil's is not
+    // thread safe, and accessing the fullPath cache and searching the search paths is not thread safe
+    auto fullPath = fullPathForFilename(path);
+    performOperationOffthread([fullPath]() -> std::string {
+        return FileUtils::getInstance()->getStringFromFile(fullPath);
+    }, std::move(callback));
+}
+
 Data FileUtils::getDataFromFile(const std::string& filename)
 {
     Data d;
@@ -624,6 +644,13 @@ Data FileUtils::getDataFromFile(const std::string& filename)
     return d;
 }
 
+void FileUtils::getDataFromFile(const std::string& filename, std::function<void(Data)> callback)
+{
+    auto fullPath = fullPathForFilename(filename);
+    performOperationOffthread([fullPath]() -> Data {
+        return FileUtils::getInstance()->getDataFromFile(fullPath);
+    }, std::move(callback));
+}
 
 FileUtils::Status FileUtils::getContents(const std::string& filename, ResizableBuffer* buffer)
 {
@@ -721,6 +748,21 @@ unsigned char* FileUtils::getFileDataFromZip(const std::string& zipFilePath, con
     }
 
     return buffer;
+}
+
+void FileUtils::writeValueMapToFile(ValueMap dict, const std::string& fullPath, std::function<void(bool)> callback)
+{
+    
+    performOperationOffthread([fullPath](const ValueMap& dictIn) -> bool {
+        return FileUtils::getInstance()->writeValueMapToFile(dictIn, fullPath);
+    }, std::move(callback), std::move(dict));
+}
+
+void FileUtils::writeValueVectorToFile(ValueVector vecData, const std::string& fullPath, std::function<void(bool)> callback)
+{
+    performOperationOffthread([fullPath] (const ValueVector& vecDataIn) -> bool {
+        return FileUtils::getInstance()->writeValueVectorToFile(vecDataIn, fullPath);
+    }, std::move(callback), std::move(vecData));
 }
 
 std::string FileUtils::getNewFilename(const std::string &filename) const
@@ -985,6 +1027,14 @@ bool FileUtils::isFileExist(const std::string& filename) const
     }
 }
 
+void FileUtils::isFileExist(const std::string& filename, std::function<void(bool)> callback)
+{
+    auto fullPath = fullPathForFilename(filename);
+    performOperationOffthread([fullPath]() -> bool {
+        return FileUtils::getInstance()->isFileExist(fullPath);
+    }, std::move(callback));
+}
+
 bool FileUtils::isAbsolutePath(const std::string& path) const
 {
     return (path[0] == '/');
@@ -1021,6 +1071,59 @@ bool FileUtils::isDirectoryExist(const std::string& dirPath) const
         }
     }
     return false;
+}
+
+void FileUtils::isDirectoryExist(const std::string& fullPath, std::function<void(bool)> callback)
+{
+    CCASSERT(isAbsolutePath(fullPath), "Async isDirectoryExist only accepts absolute file paths");
+    performOperationOffthread([fullPath]() -> bool {
+        return FileUtils::getInstance()->isDirectoryExist(fullPath);
+    }, std::move(callback));
+}
+
+void FileUtils::createDirectory(const std::string& dirPath, std::function<void(bool)> callback)
+{
+    performOperationOffthread([dirPath]() -> bool {
+        return FileUtils::getInstance()->createDirectory(dirPath);
+    }, std::move(callback));
+}
+
+void FileUtils::removeDirectory(const std::string& dirPath, std::function<void(bool)> callback)
+{
+    performOperationOffthread([dirPath]() -> bool {
+        return FileUtils::getInstance()->removeDirectory(dirPath);
+    }, std::move(callback));
+}
+
+void FileUtils::removeFile(const std::string &filepath, std::function<void (bool)> callback)
+{
+    auto fullPath = fullPathForFilename(filepath);
+    performOperationOffthread([fullPath]() -> bool {
+        return FileUtils::getInstance()->removeFile(fullPath);
+    }, std::move(callback));
+}
+
+void FileUtils::renameFile(const std::string &path, const std::string &oldname, const std::string &name, std::function<void(bool)> callback)
+{
+    performOperationOffthread([path, oldname, name]() -> bool {
+        return FileUtils::getInstance()->renameFile(path, oldname, name);
+    }, std::move(callback));
+                                
+}
+
+void FileUtils::renameFile(const std::string &oldfullpath, const std::string &newfullpath, std::function<void(bool)> callback)
+{
+    performOperationOffthread([oldfullpath, newfullpath]() {
+        return FileUtils::getInstance()->renameFile(oldfullpath, newfullpath);
+    }, std::move(callback));
+}
+
+void FileUtils::getFileSize(const std::string &filepath, std::function<void(long)> callback)
+{
+    auto fullPath = fullPathForFilename(filepath);
+    performOperationOffthread([fullPath]() {
+        return FileUtils::getInstance()->getFileSize(fullPath);
+    }, std::move(callback));
 }
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
@@ -1126,9 +1229,9 @@ bool FileUtils::createDirectory(const std::string& path)
 
     // Create path recursively
     subpath = "";
-    for (int i = 0, size = dirs.size(); i < size; ++i)
+    for (const auto& iter : dirs)
     {
-        subpath += dirs[i];
+        subpath += iter;
         dir = opendir(subpath.c_str());
 
         if (!dir)
@@ -1260,11 +1363,11 @@ std::string FileUtils::getFileExtension(const std::string& filePath) const
     return fileExtension;
 }
 
-void FileUtils::valueMapCompact(ValueMap& valueMap)
+void FileUtils::valueMapCompact(ValueMap& /*valueMap*/)
 {
 }
 
-void FileUtils::valueVectorCompact(ValueVector& valueVector)
+void FileUtils::valueVectorCompact(ValueVector& /*valueVector*/)
 {
 }
 

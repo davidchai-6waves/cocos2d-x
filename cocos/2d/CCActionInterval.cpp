@@ -73,14 +73,12 @@ ExtraAction* ExtraAction::reverse() const
     return ExtraAction::create();
 }
 
-void ExtraAction::update(float time)
+void ExtraAction::update(float /*time*/)
 {
-    CC_UNUSED_PARAM(time);
 }
 
-void ExtraAction::step(float dt)
+void ExtraAction::step(float /*dt*/)
 {
-    CC_UNUSED_PARAM(dt);
 }
 
 //
@@ -119,7 +117,8 @@ bool ActionInterval::sendUpdateEventToScript(float dt, Action *actionObject)
 
 bool ActionInterval::isDone() const
 {
-    return _elapsed >= _duration;
+    // fix #14936 _duration is not 0, but _elapsed is 0.
+    return (_elapsed + FLT_EPSILON) >= _duration;
 }
 
 void ActionInterval::step(float dt)
@@ -144,9 +143,8 @@ void ActionInterval::step(float dt)
     this->update(updateDt);
 }
 
-void ActionInterval::setAmplitudeRate(float amp)
+void ActionInterval::setAmplitudeRate(float /*amp*/)
 {
-    CC_UNUSED_PARAM(amp);
     // Abstract class needs implementation
     CCASSERT(0, "Subclass should implement this method!");
 }
@@ -329,7 +327,8 @@ void Sequence::startWithTarget(Node *target)
         return;
     }
     if (_duration > FLT_EPSILON)
-        _split = _actions[0]->getDuration() / _duration;
+        // fix #14936 - FLT_EPSILON (instant action) / very fast duration (0.001) leads to worng split, that leads to call instant action few times
+        _split = _actions[0]->getDuration() > FLT_EPSILON ? _actions[0]->getDuration() / _duration : 0;
     
     ActionInterval::startWithTarget(target);
     _last = -1;
@@ -2420,9 +2419,8 @@ DelayTime* DelayTime::clone() const
     return DelayTime::create(_duration);
 }
 
-void DelayTime::update(float time)
+void DelayTime::update(float /*time*/)
 {
-    CC_UNUSED_PARAM(time);
     return;
 }
 
