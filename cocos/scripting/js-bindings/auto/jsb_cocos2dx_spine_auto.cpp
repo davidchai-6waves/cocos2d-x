@@ -136,7 +136,7 @@ bool js_cocos2dx_spine_SkeletonRenderer_initWithData(JSContext *cx, uint32_t arg
         #pragma warning NO CONVERSION TO NATIVE FOR spSkeletonData*
 		ok = false;
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_spine_SkeletonRenderer_initWithData : Error processing arguments");
-        cobj->initWithData(arg0);
+//        cobj->initWithData(arg0);
         args.rval().setUndefined();
         return true;
     }
@@ -147,7 +147,7 @@ bool js_cocos2dx_spine_SkeletonRenderer_initWithData(JSContext *cx, uint32_t arg
 		ok = false;
         arg1 = JS::ToBoolean(args.get(1));
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_spine_SkeletonRenderer_initWithData : Error processing arguments");
-        cobj->initWithData(arg0, arg1);
+//        cobj->initWithData(arg0, arg1);
         args.rval().setUndefined();
         return true;
     }
@@ -194,7 +194,7 @@ bool js_cocos2dx_spine_SkeletonRenderer_initWithJsonFile(JSContext *cx, uint32_t
             std::string arg1;
             ok &= jsval_to_std_string(cx, args.get(1), &arg1);
             if (!ok) { ok = true; break; }
-            cobj->initWithJsonFile(arg0, arg1);
+//            cobj->initWithJsonFile(arg0, arg1);
             args.rval().setUndefined();
             return true;
         }
@@ -211,7 +211,7 @@ bool js_cocos2dx_spine_SkeletonRenderer_initWithJsonFile(JSContext *cx, uint32_t
             double arg2 = 0;
             ok &= JS::ToNumber( cx, args.get(2), &arg2) && !std::isnan(arg2);
             if (!ok) { ok = true; break; }
-            cobj->initWithJsonFile(arg0, arg1, arg2);
+//            cobj->initWithJsonFile(arg0, arg1, arg2);
             args.rval().setUndefined();
             return true;
         }
@@ -226,7 +226,7 @@ bool js_cocos2dx_spine_SkeletonRenderer_initWithJsonFile(JSContext *cx, uint32_t
             #pragma warning NO CONVERSION TO NATIVE FOR spAtlas*
 			ok = false;
             if (!ok) { ok = true; break; }
-            cobj->initWithJsonFile(arg0, arg1);
+//            cobj->initWithJsonFile(arg0, arg1);
             args.rval().setUndefined();
             return true;
         }
@@ -244,7 +244,7 @@ bool js_cocos2dx_spine_SkeletonRenderer_initWithJsonFile(JSContext *cx, uint32_t
             double arg2 = 0;
             ok &= JS::ToNumber( cx, args.get(2), &arg2) && !std::isnan(arg2);
             if (!ok) { ok = true; break; }
-            cobj->initWithJsonFile(arg0, arg1, arg2);
+//            cobj->initWithJsonFile(arg0, arg1, arg2);
             args.rval().setUndefined();
             return true;
         }
@@ -288,7 +288,7 @@ bool js_cocos2dx_spine_SkeletonRenderer_initWithBinaryFile(JSContext *cx, uint32
             std::string arg1;
             ok &= jsval_to_std_string(cx, args.get(1), &arg1);
             if (!ok) { ok = true; break; }
-            cobj->initWithBinaryFile(arg0, arg1);
+//            cobj->initWithBinaryFile(arg0, arg1);
             args.rval().setUndefined();
             return true;
         }
@@ -305,7 +305,7 @@ bool js_cocos2dx_spine_SkeletonRenderer_initWithBinaryFile(JSContext *cx, uint32
             double arg2 = 0;
             ok &= JS::ToNumber( cx, args.get(2), &arg2) && !std::isnan(arg2);
             if (!ok) { ok = true; break; }
-            cobj->initWithBinaryFile(arg0, arg1, arg2);
+//            cobj->initWithBinaryFile(arg0, arg1, arg2);
             args.rval().setUndefined();
             return true;
         }
@@ -320,7 +320,7 @@ bool js_cocos2dx_spine_SkeletonRenderer_initWithBinaryFile(JSContext *cx, uint32
             #pragma warning NO CONVERSION TO NATIVE FOR spAtlas*
 			ok = false;
             if (!ok) { ok = true; break; }
-            cobj->initWithBinaryFile(arg0, arg1);
+//            cobj->initWithBinaryFile(arg0, arg1);
             args.rval().setUndefined();
             return true;
         }
@@ -338,7 +338,7 @@ bool js_cocos2dx_spine_SkeletonRenderer_initWithBinaryFile(JSContext *cx, uint32
             double arg2 = 0;
             ok &= JS::ToNumber( cx, args.get(2), &arg2) && !std::isnan(arg2);
             if (!ok) { ok = true; break; }
-            cobj->initWithBinaryFile(arg0, arg1, arg2);
+//            cobj->initWithBinaryFile(arg0, arg1, arg2);
             args.rval().setUndefined();
             return true;
         }
@@ -945,7 +945,7 @@ bool js_cocos2dx_spine_SkeletonAnimation_setTrackCompleteListener(JSContext *cx,
 		} while(0)
 		;
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_spine_SkeletonAnimation_setTrackCompleteListener : Error processing arguments");
-        cobj->setTrackCompleteListener(arg0, arg1);
+//        cobj->setTrackCompleteListener(arg0, arg1);
         args.rval().setUndefined();
         return true;
     }
@@ -1013,7 +1013,7 @@ bool js_cocos2dx_spine_SkeletonAnimation_setTrackEventListener(JSContext *cx, ui
 		} while(0)
 		;
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_spine_SkeletonAnimation_setTrackEventListener : Error processing arguments");
-        cobj->setTrackEventListener(arg0, arg1);
+//        cobj->setTrackEventListener(arg0, arg1);
         args.rval().setUndefined();
         return true;
     }
@@ -1082,7 +1082,7 @@ bool js_cocos2dx_spine_SkeletonAnimation_setTrackStartListener(JSContext *cx, ui
 		} while(0)
 		;
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_spine_SkeletonAnimation_setTrackStartListener : Error processing arguments");
-        cobj->setTrackStartListener(arg0, arg1);
+//        cobj->setTrackStartListener(arg0, arg1);
         args.rval().setUndefined();
         return true;
     }
@@ -1108,7 +1108,7 @@ bool js_cocos2dx_spine_SkeletonAnimation_onTrackEntryEvent(JSContext *cx, uint32
         #pragma warning NO CONVERSION TO NATIVE FOR spEvent*
 		ok = false;
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_spine_SkeletonAnimation_onTrackEntryEvent : Error processing arguments");
-        cobj->onTrackEntryEvent(arg0, arg1, arg2);
+//        cobj->onTrackEntryEvent(arg0, arg1, arg2);
         args.rval().setUndefined();
         return true;
     }
@@ -1150,7 +1150,7 @@ bool js_cocos2dx_spine_SkeletonAnimation_setDisposeListener(JSContext *cx, uint3
 		} while(0)
 		;
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_spine_SkeletonAnimation_setDisposeListener : Error processing arguments");
-        cobj->setDisposeListener(arg0);
+//        cobj->setDisposeListener(arg0);
         args.rval().setUndefined();
         return true;
     }
@@ -1195,7 +1195,7 @@ bool js_cocos2dx_spine_SkeletonAnimation_setTrackInterruptListener(JSContext *cx
 		} while(0)
 		;
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_spine_SkeletonAnimation_setTrackInterruptListener : Error processing arguments");
-        cobj->setTrackInterruptListener(arg0, arg1);
+//        cobj->setTrackInterruptListener(arg0, arg1);
         args.rval().setUndefined();
         return true;
     }
@@ -1237,7 +1237,7 @@ bool js_cocos2dx_spine_SkeletonAnimation_setEndListener(JSContext *cx, uint32_t 
 		} while(0)
 		;
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_spine_SkeletonAnimation_setEndListener : Error processing arguments");
-        cobj->setEndListener(arg0);
+//        cobj->setEndListener(arg0);
         args.rval().setUndefined();
         return true;
     }
@@ -1300,7 +1300,7 @@ bool js_cocos2dx_spine_SkeletonAnimation_setTrackDisposeListener(JSContext *cx, 
 		} while(0)
 		;
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_spine_SkeletonAnimation_setTrackDisposeListener : Error processing arguments");
-        cobj->setTrackDisposeListener(arg0, arg1);
+//        cobj->setTrackDisposeListener(arg0, arg1);
         args.rval().setUndefined();
         return true;
     }
@@ -1343,7 +1343,7 @@ bool js_cocos2dx_spine_SkeletonAnimation_setEventListener(JSContext *cx, uint32_
 		} while(0)
 		;
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_spine_SkeletonAnimation_setEventListener : Error processing arguments");
-        cobj->setEventListener(arg0);
+//        cobj->setEventListener(arg0);
         args.rval().setUndefined();
         return true;
     }
@@ -1385,7 +1385,7 @@ bool js_cocos2dx_spine_SkeletonAnimation_setCompleteListener(JSContext *cx, uint
 		} while(0)
 		;
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_spine_SkeletonAnimation_setCompleteListener : Error processing arguments");
-        cobj->setCompleteListener(arg0);
+//        cobj->setCompleteListener(arg0);
         args.rval().setUndefined();
         return true;
     }
@@ -1452,7 +1452,7 @@ bool js_cocos2dx_spine_SkeletonAnimation_setInterruptListener(JSContext *cx, uin
 		} while(0)
 		;
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_spine_SkeletonAnimation_setInterruptListener : Error processing arguments");
-        cobj->setInterruptListener(arg0);
+//        cobj->setInterruptListener(arg0);
         args.rval().setUndefined();
         return true;
     }
@@ -1478,7 +1478,7 @@ bool js_cocos2dx_spine_SkeletonAnimation_onAnimationStateEvent(JSContext *cx, ui
         #pragma warning NO CONVERSION TO NATIVE FOR spEvent*
 		ok = false;
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_spine_SkeletonAnimation_onAnimationStateEvent : Error processing arguments");
-        cobj->onAnimationStateEvent(arg0, arg1, arg2);
+//        cobj->onAnimationStateEvent(arg0, arg1, arg2);
         args.rval().setUndefined();
         return true;
     }
@@ -1539,7 +1539,7 @@ bool js_cocos2dx_spine_SkeletonAnimation_setTrackEndListener(JSContext *cx, uint
 		} while(0)
 		;
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_spine_SkeletonAnimation_setTrackEndListener : Error processing arguments");
-        cobj->setTrackEndListener(arg0, arg1);
+//        cobj->setTrackEndListener(arg0, arg1);
         args.rval().setUndefined();
         return true;
     }
@@ -1581,7 +1581,7 @@ bool js_cocos2dx_spine_SkeletonAnimation_setStartListener(JSContext *cx, uint32_
 		} while(0)
 		;
         JSB_PRECONDITION2(ok, cx, false, "js_cocos2dx_spine_SkeletonAnimation_setStartListener : Error processing arguments");
-        cobj->setStartListener(arg0);
+//        cobj->setStartListener(arg0);
         args.rval().setUndefined();
         return true;
     }
