@@ -96,6 +96,7 @@ class HeadTaskHandler extends AsyncHttpResponseHandler {
          }
          Cocos2dxDownloader.setResumingSupport(_host, acceptRanges);
          Cocos2dxDownloader.createTask(_downloader, _id, _url, _path);
+         _downloader.runNextTaskIfExists();
      }
 
      @Override
