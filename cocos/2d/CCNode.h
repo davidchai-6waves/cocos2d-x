@@ -128,6 +128,12 @@ public:
     static Node * create();
 
     /**
+     * Gets count of nodes those are attached to scene graph.
+     */
+    static int getAttachedNodeCount();
+public:
+    
+    /**
      * Gets the description string. It makes debugging easier.
      * @return A string
      * @js NA
@@ -1336,7 +1342,7 @@ public:
      * @js NA
      * @lua NA
      */
-    bool isScheduled(SEL_SCHEDULE selector);
+    bool isScheduled(SEL_SCHEDULE selector) const;
 
     /**
      * Checks whether a lambda function is scheduled.
@@ -1346,7 +1352,7 @@ public:
      * @js NA
      * @lua NA
      */
-    bool isScheduled(const std::string &key);
+    bool isScheduled(const std::string &key) const;
 
     /**
      * Schedules the "update" method.
@@ -2012,6 +2018,8 @@ public:
     friend class PhysicsBody;
 #endif
 
+    static int __attachedNodeCount;
+    
 private:
     CC_DISALLOW_COPY_AND_ASSIGN(Node);
 };

@@ -41,8 +41,27 @@
 using namespace cocos2d;
 using namespace cocos2d::experimental;
 
-static ALCdevice *s_ALDevice = nullptr;
-static ALCcontext *s_ALContext = nullptr;
+static ALCdevice* s_ALDevice = nullptr;
+static ALCcontext* s_ALContext = nullptr;
+static AudioEngineImpl* s_instance = nullptr;
+
+typedef ALvoid (*alSourceNotificationProc)(ALuint sid, ALuint notificationID, ALvoid* userData);
+typedef ALenum (*alSourceAddNotificationProcPtr)(ALuint sid, ALuint notificationID, alSourceNotificationProc notifyProc, ALvoid* userData);
+static ALenum alSourceAddNotificationExt(ALuint sid, ALuint notificationID, alSourceNotificationProc notifyProc, ALvoid* userData)
+{
+    static alSourceAddNotificationProcPtr proc = nullptr;
+
+    if (proc == nullptr)
+    {
+        proc = (alSourceAddNotificationProcPtr)alcGetProcAddress(nullptr, "alSourceAddNotification");
+    }
+
+    if (proc)
+    {
+        return proc(sid, notificationID, notifyProc, userData);
+    }
+    return AL_INVALID_VALUE;
+}
 
 #if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
 @interface AudioEngineSessionHandler : NSObject
@@ -90,6 +109,12 @@ void AudioEngineInterruptionListenerCallback(void* user_data, UInt32 interruptio
         AudioSessionInitialize(NULL, NULL, AudioEngineInterruptionListenerCallback, self);
       }
 #endif
+    
+    BOOL success = [[AVAudioSession sharedInstance]
+                    setCategory: AVAudioSessionCategoryAmbient
+                    error: nil];
+    if (!success)
+        ALOGE("Fail to set audio session.");
     }
     return self;
 }
@@ -189,12 +214,31 @@ void AudioEngineInterruptionListenerCallback(void* user_data, UInt32 interruptio
 static id s_AudioEngineSessionHandler = nullptr;
 #endif
 
+ALvoid AudioEngineImpl::myAlSourceNotificationCallback(ALuint sid, ALuint notificationID, ALvoid* userData)
+{
+    // Currently, we only care about AL_BUFFERS_PROCESSED event
+    if (notificationID != AL_BUFFERS_PROCESSED)
+        return;
+
+    AudioPlayer* player = nullptr;
+    s_instance->_threadMutex.lock();
+    for (const auto& e : s_instance->_audioPlayers)
+    {
+        player = e.second;
+        if (player->_alSource == sid && player->_streamingSource)
+        {
+            player->wakeupRotateThread();
+        }
+    }
+    s_instance->_threadMutex.unlock();
+}
+
 AudioEngineImpl::AudioEngineImpl()
 : _lazyInitLoop(true)
 , _currentAudioID(0)
 , _scheduler(nullptr)
 {
-
+    s_instance = this;
 }
 
 AudioEngineImpl::~AudioEngineImpl()
@@ -219,6 +263,7 @@ AudioEngineImpl::~AudioEngineImpl()
 #if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
     [s_AudioEngineSessionHandler release];
 #endif
+    s_instance = nullptr;
 }
 
 bool AudioEngineImpl::init()
@@ -245,6 +290,7 @@ bool AudioEngineImpl::init()
 
             for (int i = 0; i < MAX_AUDIOINSTANCES; ++i) {
                 _alSourceUsed[_alSources[i]] = false;
+                alSourceAddNotificationExt(_alSources[i], AL_BUFFERS_PROCESSED, myAlSourceNotificationCallback, nullptr);
             }
 
             // fixed #16170: Random crash in alGenBuffers(AudioCache::readDataTask) at startup
@@ -307,7 +353,6 @@ bool AudioEngineImpl::init()
             alDeleteBuffers(1, &unusedAlBufferId);
 
             // ================ Workaround end ================ //
-
 
             _scheduler = Director::getInstance()->getScheduler();
             ret = true;
@@ -504,6 +549,9 @@ void AudioEngineImpl::stop(int audioID)
     //Note: Don't set the flag to false here, it should be set in 'update' function.
     // Otherwise, the state got from alSourceState may be wrong
 //    _alSourceUsed[player->_alSource] = false;
+
+    // Call 'update' method to cleanup immediately since the schedule may be cancelled without any notification.
+    update(0.0f);
 }
 
 void AudioEngineImpl::stopAll()
@@ -518,6 +566,9 @@ void AudioEngineImpl::stopAll()
 //    {
 //        _alSourceUsed[_alSources[index]] = false;
 //    }
+
+    // Call 'update' method to cleanup immediately since the schedule may be cancelled without any notification.
+    update(0.0f);
 }
 
 float AudioEngineImpl::getDuration(int audioID)

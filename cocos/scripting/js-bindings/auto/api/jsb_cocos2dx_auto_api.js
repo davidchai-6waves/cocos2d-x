@@ -2211,6 +2211,16 @@ create : function (
 },
 
 /**
+ * @method getAttachedNodeCount
+ * @return {int}
+ */
+getAttachedNodeCount : function (
+)
+{
+    return 0;
+},
+
+/**
  * @method Node
  * @constructor
  */
@@ -2899,8 +2909,10 @@ getVisibleOrigin : function (
 
 /**
  * @method mainLoop
- */
-mainLoop : function (
+* @param {float} float
+*/
+mainLoop : function(
+float 
 )
 {
 },
@@ -8084,6 +8096,23 @@ EventListenerMouse : function (
 };
 
 /**
+ * @class EventListenerController
+ */
+cc.EventListenerController = {
+
+/**
+ * @method create
+ * @return {cc.EventListenerController}
+ */
+create : function (
+)
+{
+    return cc.EventListenerController;
+},
+
+};
+
+/**
  * @class EventListenerTouchOneByOne
  */
 cc.EventListenerTouchOneByOne = {
@@ -8149,6 +8178,88 @@ init : function (
  * @constructor
  */
 EventListenerTouchAllAtOnce : function (
+)
+{
+},
+
+};
+
+/**
+ * @class EventController
+ */
+cc.EventController = {
+
+/**
+ * @method getControllerEventType
+ * @return {cc.EventController::ControllerEventType}
+ */
+getControllerEventType : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method setConnectStatus
+ * @param {bool} arg0
+ */
+setConnectStatus : function (
+bool 
+)
+{
+},
+
+/**
+ * @method isConnected
+ * @return {bool}
+ */
+isConnected : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method setKeyCode
+ * @param {int} arg0
+ */
+setKeyCode : function (
+int 
+)
+{
+},
+
+/**
+ * @method getController
+ * @return {cc.Controller}
+ */
+getController : function (
+)
+{
+    return cc.Controller;
+},
+
+/**
+ * @method getKeyCode
+ * @return {int}
+ */
+getKeyCode : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method EventController
+ * @constructor
+* @param {cc.EventController::ControllerEventType|cc.EventController::ControllerEventType} controllereventtype
+* @param {cc.Controller|cc.Controller} controller
+* @param {bool|int} bool
+*/
+EventController : function(
+controllereventtype,
+controller,
+int 
 )
 {
 },
@@ -10727,13 +10838,13 @@ node
 },
 
 /**
- * @method update
- * @param {float} arg0
+ * @method getNumberOfRunningActions
+ * @return {int}
  */
-update : function (
-float 
+getNumberOfRunningActions : function (
 )
 {
+    return 0;
 },
 
 /**
@@ -10796,6 +10907,16 @@ pauseAllRunningActions : function (
 )
 {
     return new Array();
+},
+
+/**
+ * @method update
+ * @param {float} arg0
+ */
+update : function (
+float 
+)
+{
 },
 
 /**
@@ -13970,6 +14091,242 @@ LayerGradient : function (
 };
 
 /**
+ * @class LayerRadialGradient
+ */
+cc.LayerRadialGradient = {
+
+/**
+ * @method getStartColor
+ * @return {color4b_object}
+ */
+getStartColor : function (
+)
+{
+    return cc.Color4B;
+},
+
+/**
+ * @method getBlendFunc
+ * @return {cc.BlendFunc}
+ */
+getBlendFunc : function (
+)
+{
+    return cc.BlendFunc;
+},
+
+/**
+ * @method getStartColor3B
+ * @return {color3b_object}
+ */
+getStartColor3B : function (
+)
+{
+    return cc.Color3B;
+},
+
+/**
+ * @method getStartOpacity
+ * @return {unsigned char}
+ */
+getStartOpacity : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method setCenter
+ * @param {vec2_object} arg0
+ */
+setCenter : function (
+vec2 
+)
+{
+},
+
+/**
+ * @method getEndColor
+ * @return {color4b_object}
+ */
+getEndColor : function (
+)
+{
+    return cc.Color4B;
+},
+
+/**
+ * @method setStartOpacity
+ * @param {unsigned char} arg0
+ */
+setStartOpacity : function (
+char 
+)
+{
+},
+
+/**
+ * @method getCenter
+ * @return {vec2_object}
+ */
+getCenter : function (
+)
+{
+    return cc.Vec2;
+},
+
+/**
+ * @method setEndOpacity
+ * @param {unsigned char} arg0
+ */
+setEndOpacity : function (
+char 
+)
+{
+},
+
+/**
+ * @method setExpand
+ * @param {float} arg0
+ */
+setExpand : function (
+float 
+)
+{
+},
+
+/**
+ * @method getEndOpacity
+ * @return {unsigned char}
+ */
+getEndOpacity : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method initWithColor
+ * @param {color4b_object} arg0
+ * @param {color4b_object} arg1
+ * @param {float} arg2
+ * @param {vec2_object} arg3
+ * @param {float} arg4
+ * @return {bool}
+ */
+initWithColor : function (
+color4b, 
+color4b, 
+float, 
+vec2, 
+float 
+)
+{
+    return false;
+},
+
+/**
+ * @method setEndColor
+* @param {color4b_object|color3b_object} color4b
+*/
+setEndColor : function(
+color3b 
+)
+{
+},
+
+/**
+ * @method getEndColor3B
+ * @return {color3b_object}
+ */
+getEndColor3B : function (
+)
+{
+    return cc.Color3B;
+},
+
+/**
+ * @method setRadius
+ * @param {float} arg0
+ */
+setRadius : function (
+float 
+)
+{
+},
+
+/**
+ * @method setStartColor
+* @param {color4b_object|color3b_object} color4b
+*/
+setStartColor : function(
+color3b 
+)
+{
+},
+
+/**
+ * @method getExpand
+ * @return {float}
+ */
+getExpand : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method setBlendFunc
+ * @param {cc.BlendFunc} arg0
+ */
+setBlendFunc : function (
+blendfunc 
+)
+{
+},
+
+/**
+ * @method getRadius
+ * @return {float}
+ */
+getRadius : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method create
+* @param {color4b_object} color4b
+* @param {color4b_object} color4b
+* @param {float} float
+* @param {vec2_object} vec2
+* @param {float} float
+* @return {cc.LayerRadialGradient|cc.LayerRadialGradient}
+*/
+create : function(
+color4b,
+color4b,
+float,
+vec2,
+float 
+)
+{
+    return cc.LayerRadialGradient;
+},
+
+/**
+ * @method LayerRadialGradient
+ * @constructor
+ */
+LayerRadialGradient : function (
+)
+{
+},
+
+};
+
+/**
  * @class LayerMultiplex
  */
 cc.LayerMultiplex = {
@@ -16246,6 +16603,16 @@ int
 )
 {
     return cc.ParticleSystem;
+},
+
+/**
+ * @method getAllParticleSystems
+ * @return {Array}
+ */
+getAllParticleSystems : function (
+)
+{
+    return new Array();
 },
 
 /**
