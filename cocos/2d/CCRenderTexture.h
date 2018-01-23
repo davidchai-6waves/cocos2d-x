@@ -264,6 +264,7 @@ public:
     // Overrides
     virtual void visit(Renderer *renderer, const Mat4 &parentTransform, uint32_t parentFlags) override;
     virtual void draw(Renderer *renderer, const Mat4 &transform, uint32_t flags) override;
+    virtual void setGlobalZOrder(float globalZOrder) override;
 
     /** Flag: Use stack matrix computed from scene hierarchy or generate new modelView and projection matrix.
      *
@@ -326,6 +327,7 @@ protected:
     Texture2D* _textureCopy;    // a copy of _texture
     Image*     _UITextureImage;
     Texture2D::PixelFormat _pixelFormat;
+    GLuint _depthAndStencilFormat;
     
     // code for "auto" update
     GLbitfield   _clearFlags;
@@ -362,6 +364,8 @@ protected:
     void onClearDepth();
 
     void onSaveToFile(const std::string& fileName, bool isRGBA = true);
+
+    void setupDepthAndStencil(int powW, int powH);
     
     Mat4 _oldTransMatrix, _oldProjMatrix;
     Mat4 _transformMatrix, _projectionMatrix;
