@@ -49,7 +49,7 @@ Download stable versions
 How to start a new game
 -----------------------
 
-1. Download the code from [cocos2d download site][4]
+1. Download the code from [cocos2d download site][4] or clone this repo (instructions above)
 2. Run `setup.py`
 3. Run the `cocos` script
 
@@ -65,8 +65,8 @@ You can also create a JS project or Lua project with `-l js` or `-l lua`.
 
 ### Build and run a new project for Android ###
 
-    $ cocos run -p android -j 4
-
+Cocos2d-x supports Android Studio. Simple open the `proj.android` directory from within the Android Studio environment. More information can be found in our [documentation](http://www.cocos2d-x.org/docs/cocos2d-x/en/installation/Android-Studio.html).
+   
 ### Build and run a new project for iOS ###
 
     $ cocos run -p ios
@@ -109,6 +109,15 @@ Then you can run your game in a web browser:
 Or you can publish your game to `publish/html5/` folder:
 
     $ cocos run -p web -m release [--advanced]
+
+Using CMake
+--------------------------------
+
+Cocos2d-x supports CMake, a cross-platform build system. Example usage:
+
+    $ cd cocos2d-x
+    $ mkdir cmake-build && cd cmake-build
+    $ cmake ..
 
 Documentations and samples
 -------------
@@ -230,6 +239,8 @@ $ adb install ../tests/cpp-empty-test/proj.android/bin/CppEmptyTest-debug.apk
 
 Then click item on Android device to run tests. Available value of `-p` is the API level, cocos2d-x supports from level 14.
 
+* [Detail CMake Guide](cmake/README.md)
+
 Learning Resources
 --------------------------------
 
@@ -283,7 +294,6 @@ Contact us
    * Forum: [http://discuss.cocos2d-x.org][9]
    * Twitter: [http://www.twitter.com/cocos2dx][10]
    * Weibo: [http://t.sina.com.cn/cocos2dx][11]
-   * IRC: [https://webchat.freenode.net/][12] (#cocos2d and #cocos2d-x channels)
 
 [1]: http://www.cocos2d-x.org "cocos2d-x"
 [2]: http://www.cocos2d-iphone.org "cocos2d for iPhone"
