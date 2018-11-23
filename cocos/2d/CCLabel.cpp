@@ -677,6 +677,13 @@ void Label::setString(const std::string& text)
         {
             _utf32Text  = utf32String;
         }
+
+        CCASSERT(_utf32Text.length() <= CC_LABEL_MAX_LENGTH, "Length of text should be less then 16384");
+        if (_utf32Text.length() > CC_LABEL_MAX_LENGTH)
+        {
+            cocos2d::log("Error: Label text is too long %d > %d and it will be truncated!", _utf32Text.length(), CC_LABEL_MAX_LENGTH);
+            _utf32Text = _utf32Text.substr(0, CC_LABEL_MAX_LENGTH);
+        }
     }
 }
 
@@ -2092,6 +2099,7 @@ FontDefinition Label::_getFontDefinition() const
     systemFontDef._fontSize = _systemFontSize;
     systemFontDef._alignment = _hAlignment;
     systemFontDef._vertAlignment = _vAlignment;
+    systemFontDef._lineSpacing = _lineSpacing;
     systemFontDef._dimensions.width = _labelWidth;
     systemFontDef._dimensions.height = _labelHeight;
     systemFontDef._fontFillColor.r = _textColor.r;
